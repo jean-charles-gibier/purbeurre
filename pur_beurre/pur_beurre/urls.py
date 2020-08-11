@@ -22,7 +22,7 @@ from product import views
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='pur_beurre/home.html')), #
+    path('', TemplateView.as_view(template_name='pur_beurre/home.html')),
 #    path('substitute/', include('substitute.urls')),
 #    path('product/', include('product.urls')),
 #    path(r"user/", include("user.urls")),
