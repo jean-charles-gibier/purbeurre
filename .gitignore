@@ -18,3 +18,4 @@ pur_beurre/user/idee_pour_substitute.txt
 pur_beurre/user/migrations/__pycache__/0001_initial.cpython-36.pyc
 *__pycache__*
 *.pyc
+/pur_beurre/static/node_modules/
