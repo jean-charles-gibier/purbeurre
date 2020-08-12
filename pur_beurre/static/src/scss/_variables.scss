@@ -9,10 +9,10 @@ $brown: #5c4d42;
 $primary: $pb_brown;
 
 //- Override font system
-$font-family-sans-serif: "Merriweather Sans", -apple-system, BlinkMacSystemFont,
+$font-family-sans-serif: "Scope One", sans-serif, "Merriweather Sans", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$font-family-serif: "Merriweather", -apple-system, BlinkMacSystemFont,
+$font-family-serif: "Open Sans", sans-serif, "Merriweather", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $font-family-base: $font-family-serif;

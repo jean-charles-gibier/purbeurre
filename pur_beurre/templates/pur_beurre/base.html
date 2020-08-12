@@ -13,6 +13,8 @@
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
         <!-- Third party plugin CSS-->
@@ -26,7 +28,7 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
 <!-- -->
-            <a class="nav-link js-scroll-trigger" href="#page-top">
+            <a class="nav-link js-scroll-trigger" href="#about">
                 <div class="container*">
                         <div class="row" >
                             <div class="col-lg-4 col-sm-4 center-block my-auto" style="float: none">
@@ -43,28 +45,33 @@
 
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                        <!--   -->
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#about">
+                            <div class="nav-link js-scroll-trigger">
                                 RECHERCHER<br>
-                                [____________________]
-                            </a>
+                                <form class="input-group input-group-sm-mb-3 mx-auto"  action="/products/results" method="get">
+                                    <input type="search" name="query" placeholder="Produit" class="form-control searchInput" id="search2">
+                                    <button id="search" type="submit" class="btn-primary btn">Go !</button>
+                                </form>
+                            </div>
                         </li>
+                  <!--      -->
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#services">
                                 MON COMPTE<br>
-                                <img class="mx-auto d-block"  src="{% static 'dist/assets/img/noun_user_silhouette.png' %}" alt="MON COMPTE"  style="width: auto; height: 3em;">
+                                <img class="mx-auto d-block inverse-onScroll"  src="{% static 'dist/assets/img/noun_user_silhouette.png' %}" alt="MON COMPTE"  style="width: auto; height: 3em; ">
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#portfolio">
                                 MES ALIMENTS<br>
-                                <img class="mx-auto d-block"  src="{% static 'dist/assets/img/noun_Carrot.png' %}" alt="MES ALIMENTS"  style="width: auto; height: 3em;">
+                                <img class="mx-auto d-block inverse-onScroll"  src="{% static 'dist/assets/img/noun_Carrot.png' %}" alt="MES ALIMENTS"  style="width: auto; height: 3em;">
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#contact">
                                 CONNEXION<br>
-                                <img class="mx-auto d-block"  src="{% static 'dist/assets/img/noun_Enter.png' %}" alt="CONNEXION"  style="width: auto; height: 3em;">
+                                <img class="mx-auto d-block inverse-onScroll"  src="{% static 'dist/assets/img/noun_Enter.png' %}" alt="CONNEXION"  style="width: auto; height: 3em;">
                             </a>
                         </li>
                     </ul>
@@ -96,6 +103,16 @@
         <!-- Footer-->
         {% block footer %}
         <footer class="bg-light py-5">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6 text-center">
+                  <a href="/products/legal_notice/"><h4>Mentions légales</h4></a>
+                </div>
+                <div class="col-lg-6 col-md-6 text-center">
+                  <a href="/#contact"><h4>Contact</h4></a>
+                </div>
+              </div>
+            </div>
             <div class="container"><div class="small text-center text-muted">Copyright © 2020 - JC Gibier</div></div>
         </footer>
         {% endblock footer %}

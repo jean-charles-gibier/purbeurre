@@ -12,3 +12,8 @@
 
 // Import custom utilities
 @import "./utilities.scss";
+
+.img-scrolled{
+   filter: invert(100%);
+}
+
