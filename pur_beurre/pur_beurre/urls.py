@@ -19,13 +19,14 @@ from django.urls import path, re_path, include
 from django.views.generic import TemplateView
 from substitute import views
 from product import views
+from user import views
 
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='pur_beurre/home.html')),
 #    path('substitute/', include('substitute.urls')),
 #    path('product/', include('product.urls')),
-#    path(r"user/", include("user.urls")),
+    path(r"user/", include("user.urls")),
 #    path('admin/', admin.site.urls),
 ]
 

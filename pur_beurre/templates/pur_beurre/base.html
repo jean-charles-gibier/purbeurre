@@ -27,9 +27,9 @@
         {% block nav %}
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
-<!-- -->
-            <a class="nav-link js-scroll-trigger" href="#about">
-                <div class="container*">
+
+                <a class="nav-link js-scroll-trigger" href="#about">
+                    <div class="container*">
                         <div class="row" >
                             <div class="col-lg-4 col-sm-4 center-block my-auto" style="float: none">
                                     <img class="mx-auto d-block"  src="{% static 'dist/assets/img/logo_pur_beurre.png' %}" alt="Logo Pur Beurre"  style="width: auto; height: 3em;">
@@ -39,8 +39,8 @@
                             </div>
                         </div>
                     </div>
-            </a>
-<!--  -->
+                </a>
+
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
                 <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -48,14 +48,13 @@
                         <!--   -->
                         <li class="nav-item">
                             <div class="nav-link js-scroll-trigger">
-                                RECHERCHER<br>
+                                CHERCHER<br>
                                 <form class="input-group input-group-sm-mb-3 mx-auto"  action="/products/results" method="get">
-                                    <input type="search" name="query" placeholder="Produit" class="form-control searchInput" id="search2">
-                                    <button id="search" type="submit" class="btn-primary btn">Go !</button>
+                                    <input type="search" name="query" placeholder="Produit" class="form-control searchInput ui-autocomplete-input" id="searchinput2">
+                                    <button id="searchbutton2" type="submit" class="btn-primary btn">Chercher</button>
                                 </form>
                             </div>
                         </li>
-                  <!--      -->
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#services">
                                 MON COMPTE<br>
@@ -88,9 +87,21 @@
                         <h1 class="text-uppercase text-white font-weight-bold">Du gras, mais de qualité !</h1>
                         <hr class="divider my-4" />
                     </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 font-weight-light mb-5">Trouvez un produit de substitution pour ceux que vous consomez tout les jours.</p>
-                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Rechercher Produit</a>
+                    <div class="col-lg-10 align-self-baseline">
+<div class="card rounded text-white central-card" >
+  <!--   style="background-color: rgba(var(--biscuit),0.3);" -->
+  <h5 class="card-header">
+      Trouvez un produit de substitution pour ceux que vous consomez tout les jours.
+  </h5>
+  <div class="card-body">
+
+                            <form class="input-group input-group-sm-mb-3 mx-auto" action="/products/results" method="get">
+                                <input type="search" name="query" placeholder="Produit" class="form-control searchInput ui-autocomplete-input" id="searchinput" autocomplete="off">
+                                <button id="searchbutton" type="submit" class="btn btn-primary js-scroll-trigger">Chercher</button>
+                            </form>
+  </div>
+</div>
+
                     </div>
                 </div>
             </div>
