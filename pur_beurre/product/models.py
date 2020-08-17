@@ -8,6 +8,7 @@ class Product(models.Model):
     brands = models.CharField(max_length=100)
     stores = models.CharField(max_length=100)
     url = models.URLField()
+    image_front_url = models.URLField(default='')
     nutrition_grade = models.CharField(max_length=2)
     categories = models.ManyToManyField('Category', related_name='products')
 

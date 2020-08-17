@@ -41,6 +41,7 @@ class ProductDownloader(object):
 
     def fetch(self, categorie, number=20):
         """ Fetch products from OFF API """
+# TODO : ajouter le champ 'image_front_url' => image
         from core.downloader.customrequest import special_get
 
         payload = {
@@ -50,12 +51,15 @@ class ProductDownloader(object):
             "tag_0": categorie,
             "page_size": number,
             "page": self._page_counter,
-            "fields": 'code,brands,url,stores,nutrition_grade_fr,product_name,generic_name_fr',
+            "fields": 'code,brands,url,stores,nutrition_grade_fr,product_name,generic_name_fr,image_front_url',
             "json": 1
         }
 
         try:
+#            print("====> Appel  get products page : {}".format(self._page_counter))
+
             response = special_get(constant.API_URL_PRODUCTS, payload)
+#            print("====> Appel  get products page : Done")
             data = response.json()
             self._page_counter = self._page_counter + 1
             self._list_products = data['products']

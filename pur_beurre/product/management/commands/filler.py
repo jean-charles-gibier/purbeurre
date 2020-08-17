@@ -8,7 +8,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('nb_products', nargs='?', type=int, default=10000)
 
-    def  handle(self, *args, **options):
+    def handle(self, *args, **options):
         """ test filler is instancied """
         limit_nb_products = 0
         if 'nb_products' in options:

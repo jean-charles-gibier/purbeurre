@@ -1,14 +1,16 @@
 {% extends 'pur_beurre/base.html' %}
 
+{% block title %}Pur Beurre - Inscription{% endblock %}
+<!-- { % load crispy_forms_tags % } -->
 {% load static %}
 {% block content %}
 
-<section class="page-section" id="login_section">
-  <form class="form-signin rounded align-items-center" action="{% url 'login' %}" method="POST">
+<section class="page-section" id="register_section">
+  <form class="form-signin rounded align-items-center" action="{% url 'register' %}#register_section" method="POST">
 
-    <div class="text-center">
+    <div class="text-center ">
       <img src="{% static 'dist/assets/img/logo_pur_beurre.png' %}" alt="" width="80" height="80">
-      <h1 class="pb-2">Login</h1>
+      <h1 class="pb-2">Inscription</h1>
       {% if messages %}
         {% for message in messages %}
           <p class="text-danger -{{ message.tags }}">
@@ -17,16 +19,16 @@
         {% endfor %}
       {% endif %}
       <div class="text-center mt-4">
-        <p>Non inscrit ?<br>
-          <a href="{% url 'register' %}#register_section" class="btn btn-primary">Créer le compte</a>
+        <p>Déjà inscrit ?<br>
+          <a href="{% url 'login' %}#login_section" class="btn btn-primary">Connectez-vous</a>
         </p>
       </div>
     </div>
-    <br>
-    {% csrf_token %}
-     <!--   { { form.as_table } } -->
 
-    <div class="container mx-auto">
+    {% csrf_token %}
+       <div class="container mx-auto">
+
+     <div class="container mx-auto">
     {% for field in form %}
       <div class="row">
         <div class="col-lg-2 offset-md-4">
@@ -37,7 +39,7 @@
           {{ field }}
         </div>
           {% if field.help_text %}
-          <div class="col">
+          <div class="col_lg2">
             <p class="help">{{ field.help_text|safe }}</p>
           </div>
           {% endif %}
@@ -45,14 +47,12 @@
     {% endfor %}
     </div>
 
+
     <div class="text-center">
-     <button class="btn btn-primary mt-4" type="submit">Login</button>
+      <button class="btn btn-primary mt-4" type="submit">Créer le compte</button>
     </div>
 
   </form>
-{</section>
+</section>
 
 {% endblock %}
-
-
-

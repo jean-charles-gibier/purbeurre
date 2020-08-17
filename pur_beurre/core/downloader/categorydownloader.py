@@ -43,8 +43,11 @@ class CategoryDownloader(object):
         }
 
         try:
+#            print("====> Appel  get categories")
             response = core.downloader.customrequest.special_get(
                 constant.API_URL_CATEGORIES, payload)
+#            print("====> Appel  get categories : Done")
+
             data = response.json()
             # on ne selectionne que les catégories avec un nombre "consequent" de produits
             self._list_categories = [categorie for categorie in data['tags']

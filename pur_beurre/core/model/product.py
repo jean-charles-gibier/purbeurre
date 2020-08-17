@@ -21,12 +21,15 @@ class Product():
             if 'stores' in product else ''
         self._columns_values['url'] = product['url'] \
             if 'url' in product else ''
-        self._columns_values['nutrition_grade'] = product[
-            'nutrition_grade_fr'] \
+        self._columns_values['image_front_url'] = product['image_front_url'] \
+            if 'image_front_url' in product \
+            else 'dist/assets/img/nothing.png'
+        self._columns_values['nutrition_grade'] = product['nutrition_grade_fr'] \
             if 'nutrition_grade_fr' in product else 'z'
         self._columns_names = \
             ['code', 'name', 'generic_name',
-             'brands', 'stores', 'url', 'nutrition_grade']
+             'brands', 'stores', 'url',
+             'image_front_url', 'nutrition_grade']
 
     # builder json
     @classmethod
@@ -89,6 +92,12 @@ class Product():
         """ returns url access
         property openfactsfood """
         return self._columns_values['url']
+
+    @property
+    def image_front_url(self):
+        """ returns image url access
+         """
+        return self._columns_values['image_front_url']
 
     @property
     def nutrition_grade(self):

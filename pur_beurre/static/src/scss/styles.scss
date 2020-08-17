@@ -13,10 +13,15 @@
 // Import custom utilities
 @import "./utilities.scss";
 
-.img-scrolled{
+.img-scrolled {
    filter: invert(100%);
 }
 
 .central-card {
   background-color: rgba( 52, 90, 97, 0.3);
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
 }

@@ -45,7 +45,6 @@
 
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                        <!--   -->
                         <li class="nav-item">
                             <div class="nav-link js-scroll-trigger">
                                 CHERCHER<br>
@@ -56,10 +55,17 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#services">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link js-scroll-trigger" href="{% url 'dashboard' %}#dashboard_section">
+                                {{ user.username }}<br>
+                                <img class="mx-auto d-block inverse-onScroll"  src="{% static 'dist/assets/img/noun_user_silhouette.png' %}" alt="MON COMPTE"  style="width: auto; height: 3em; ">
+                            </a>
+                            {% else %}
+                            <a class="nav-link js-scroll-trigger" href="{% url 'login' %}#login_section">
                                 MON COMPTE<br>
                                 <img class="mx-auto d-block inverse-onScroll"  src="{% static 'dist/assets/img/noun_user_silhouette.png' %}" alt="MON COMPTE"  style="width: auto; height: 3em; ">
                             </a>
+                            {% endif %}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#portfolio">
@@ -68,10 +74,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#contact">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link js-scroll-trigger" href="{% url 'logout' %}">
+                                DECONNEXION<br>
+                                <img class="mx-auto d-block inverse-onScroll"  src="{% static 'dist/assets/img/noun_Exit.png' %}" alt="CONNEXION"  style="width: auto; height: 3em;">
+                            </a>
+                            {% else %}
+                            <a class="nav-link js-scroll-trigger" href="{% url 'login' %}#login_section">
                                 CONNEXION<br>
                                 <img class="mx-auto d-block inverse-onScroll"  src="{% static 'dist/assets/img/noun_Enter.png' %}" alt="CONNEXION"  style="width: auto; height: 3em;">
                             </a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
