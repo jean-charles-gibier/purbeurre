@@ -1,9 +1,8 @@
-from django.urls import path, include
-from . import views
+from django.urls import path, include, re_path
+from .views import ListProductsView
 
 
 urlpatterns = [
-    path('', views.product), #
-    path('product', views.product), #
-    path('category', views.category), #
+    re_path(r"results?",
+            ListProductsView.as_view(), name='query_products'),
 ]
