@@ -64,7 +64,7 @@ if(window.location.hash != null){
                     </span>
                 </td>
                 <td>
-                <a href="{{ product.url }}">Lire le descriptif sur OFF</a>
+                <a href="{{ product.url }}">Descriptif OpenFoodsFacts</a>
                 </td>
                 <td>
                 <a href="" class="btn btn-primary">Choisir un substitut</a>
@@ -77,7 +77,7 @@ if(window.location.hash != null){
 
     {# Mise en forme de la pagination #}
     {% if is_paginated %}
-        <div class="pagination">
+        <div class="pagination" style="text-align: center">
                {% if page_obj.has_previous %}
                    <a href="?page={{ page_obj.previous_page_number }}">Précédente</a> —
                {% endif %}
