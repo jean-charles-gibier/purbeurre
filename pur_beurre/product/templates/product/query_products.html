@@ -77,15 +77,23 @@ if(window.location.hash != null){
 
     {# Mise en forme de la pagination #}
     {% if is_paginated %}
-        <div class="pagination" style="text-align: center">
-               {% if page_obj.has_previous %}
-                   <a href="?page={{ page_obj.previous_page_number }}">Précédente</a> —
-               {% endif %}
-               Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
-               {% if page_obj.has_next %}
-                  — <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
-               {% endif %}
+    <div class="container" >
+        <div class="row">
+            <div class="col-12">
+                <div class="mx-auto w-50 text-center">
+                    <div class="pagination" style="display: unset;">
+                           {% if page_obj.has_previous %}
+                               <a href="?page={{ page_obj.previous_page_number }}">Précédente</a> —
+                           {% endif %}
+                           Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+                           {% if page_obj.has_next %}
+                              — <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
+                           {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     {% endif %}
 </section>
 
