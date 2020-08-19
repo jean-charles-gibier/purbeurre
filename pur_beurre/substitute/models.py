@@ -7,7 +7,7 @@ Test substitut
 """
 
 
-class substitute(models.Model):
+class Substitute(models.Model):
 
     user_subst = models.ForeignKey(User, related_name='user_subst', on_delete=models.SET_NULL, null=True)
     product_origin = models.ForeignKey('product.Product', related_name='product_origin', on_delete=models.SET_NULL, null=True, blank=True)

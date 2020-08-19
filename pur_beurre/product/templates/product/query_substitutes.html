@@ -6,21 +6,32 @@
 // petite bidouille pour scroller sur le dashboard
 if(window.location.hash != null){
     var hash = window.location.hash.substring(1);
-    if(hash !== "list_products_section") {
+    if(hash !== "list_substitutes_section") {
         window.location.replace("#");
         // slice off the remaining '#' in HTML5:
         if (typeof window.history.replaceState == 'function') {
             history.replaceState({}, '', window.location.href.slice(0, -1));
             }
-        location.replace('#list_products_section');
+        location.replace('#list_substitutes_section');
         window.location.reload( false );
         }
     }
 </script>
-<section class="page-section" id="list_products_section">
+<section class="page-section" id="list_substitutes_section">
 
-    <div style="text-align: center">
-        <h1>Produits correspondants à votre selection :</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-3" style="display:block; flex-direction:column; justify-content:right; text-align:right">
+                <img style="width: auto; height: 6em;" class="rounded" src="{{image_front_url}}"/>
+            </div>
+            <div class="col-7">
+                <div style="text-align: center">
+                    <h3>Produits pouvant se substituer à <br>
+                        <b>{{ product_name }}, {{ brand_name }}</b>
+                    </h3>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="product container">
@@ -39,7 +50,7 @@ if(window.location.hash != null){
           </tr>
         </thead>
         <tbody>
-    {% for product in produits_trouves %}
+    {% for product in substituts_trouves %}
             <tr>
                 <td class="col bg-info">
                 <img style="width: auto; height: 9em;" class="rounded" src="{{product.image_front_url}}"/>
@@ -68,7 +79,7 @@ if(window.location.hash != null){
                 <a href="{{ product.url }}">Descriptif OpenFoodsFacts</a>
                 </td>
                 <td>
-                <a href="{% url  'query_substituts' %}?id={{ product.id }}" class="btn btn-primary">Choisir ce produit</a>
+                <a href="{% url 'register_substituts' %}?{{ request.GET.urlencode }}&sub={{ product.id }}" class="btn btn-primary">Choisir ce substitut</a>
                 </td>
             </tr>
    {% endfor %}
