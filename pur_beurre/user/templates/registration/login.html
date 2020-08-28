@@ -50,7 +50,22 @@
     </div>
 
   </form>
-{</section>
+</section>
+<script type='text/javascript'>
+// petite bidouille pour scroller sur le dashboard
+if(window.location.hash != null){
+    var hash = window.location.hash.substring(1);
+    if(hash !== "login_section") {
+        window.location.replace("#");
+        // slice off the remaining '#' in HTML5:
+        if (typeof window.history.replaceState == 'function') {
+            history.replaceState({}, '', window.location.href.slice(0, -1));
+            }
+        location.replace('#login_section');
+        window.location.reload( false );
+        }
+    }
+</script>
 
 {% endblock %}
 

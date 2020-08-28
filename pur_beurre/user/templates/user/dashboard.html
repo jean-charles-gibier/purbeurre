@@ -1,21 +1,6 @@
 {% extends 'pur_beurre/base.html' %}
 
 {% block content %}
-<script type='text/javascript'>
-// petite bidouille pour scroller sur le dashboard
-if(window.location.hash != null){
-    var hash = window.location.hash.substring(1);
-    if(hash !== "dashboard_section") {
-        window.location.replace("#");
-        // slice off the remaining '#' in HTML5:
-        if (typeof window.history.replaceState == 'function') {
-            history.replaceState({}, '', window.location.href.slice(0, -1));
-            }
-        location.replace('#dashboard_section');
-        window.location.reload( false );
-        }
-    }
-</script>
 <section class="page-section" id="dashboard_section">
 
   <div class="container d-flex" style="justify-content:center">
@@ -50,5 +35,19 @@ if(window.location.hash != null){
   </div>
 
 </section>
-
+<script type='text/javascript'>
+// petite bidouille pour scroller sur le dashboard
+if(window.location.hash != null){
+    var hash = window.location.hash.substring(1);
+    if(hash !== "dashboard_section") {
+        window.location.replace("#");
+        // slice off the remaining '#' in HTML5:
+        if (typeof window.history.replaceState == 'function') {
+            history.replaceState({}, '', window.location.href.slice(0, -1));
+            }
+        location.replace('#dashboard_section');
+        window.location.reload( false );
+        }
+    }
+</script>
 {% endblock %}

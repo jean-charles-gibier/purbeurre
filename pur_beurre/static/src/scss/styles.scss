@@ -25,3 +25,37 @@
     float: none;
     margin: 0 auto;
 }
+
+.badge-nutriscore {
+  position: absolute;
+  right: 22%;
+  top: 10%;
+  font-size: 2em;
+}
+.badge-title {
+  position: absolute;
+}
+.badge-product {
+  position: absolute;
+  right: 43%;
+}
+.badge-success {
+  background-color: #32CD32;
+  color: rgba(46, 39, 49);
+}
+.badge-light {
+  background-color: #ADFF2F;
+  color: rgba(46, 39, 49);
+}
+.badge-primary {
+  background-color: #FFD700;
+  color: rgba(46, 39, 49);
+}
+.badge-warning {
+  background-color: #FFA500;
+  color: rgba(46, 39, 49);
+}
+.badge-danger {
+  background-color: #FF0000;
+  color: rgba(46, 39, 49);
+}

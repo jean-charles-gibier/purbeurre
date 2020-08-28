@@ -1,11 +1,9 @@
+from django.views.generic import ListView
 from django.urls import path, include
 from . import views
 
 
 urlpatterns = [
-    path('', views.index), #
-
-#    path(r'^$', include(('substitute.urls','substitute'), namespace='substitute')),
-#    path(r'^substitute/', include(('substitute.urls','substitute'), namespace='substitute')),
-#    path(r'^$', views.listing, name='listing'),
+    path('', views.ListRegisteredSubstitutes.as_view(), name='substitutes_list'), #
+    path('delete/', views.delete_substituts, name='delete_substituts'),
 ]

@@ -1,22 +1,7 @@
 {% extends 'pur_beurre/base.html' %}
-{% load urlparams %}
+{% load urlparams getcolor %}
 
 {% block content %}
-<script type='text/javascript'>
-// petite bidouille pour scroller sur le dashboard
-if(window.location.hash != null){
-    var hash = window.location.hash.substring(1);
-    if(hash !== "list_products_section") {
-        window.location.replace("#");
-        // slice off the remaining '#' in HTML5:
-        if (typeof window.history.replaceState == 'function') {
-            history.replaceState({}, '', window.location.href.slice(0, -1));
-            }
-        location.replace('#list_products_section');
-        window.location.reload( false );
-        }
-    }
-</script>
 <section class="page-section" id="list_products_section">
 
     <div style="text-align: center">
@@ -60,8 +45,9 @@ if(window.location.hash != null){
                 {{ product.stores }}
                 </td>
                 <td>
-                    <span class="badge-pill badge-info text-uppercase">
-                    {{ product.nutrition_grade }}
+                   <span class="badge-pill text-uppercase"
+                                  style="background-color :{%  getcolor product.nutrition_grade %}; color :#000000">
+                       {{ product.nutrition_grade }}
                     </span>
                 </td>
                 <td>
@@ -97,5 +83,25 @@ if(window.location.hash != null){
     </div>
     {% endif %}
 </section>
+<script type='text/javascript'>
+<!--
+// petite bidouille pour scroller sur le dashboard
+if(window.location.hash != null){
+    var hash = window.location.hash.substring(1);
+    if(hash !== "list_products_section") {
+        window.location.replace("#");
+        // slice off the remaining '#' in HTML5:
+        if (typeof window.history.replaceState == 'function') {
+            history.replaceState({}, '', window.location.href.slice(0, -1));
+            }
+        location.replace('#list_products_section');
+        window.location.reload( true );
+        }
+    } else {
+        location.replace('#list_products_section');
+        window.location.reload( true );
+    }
+    -->
+</script>
 
 {% endblock %}

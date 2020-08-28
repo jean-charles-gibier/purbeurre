@@ -68,7 +68,7 @@
                             {% endif %}
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#portfolio">
+                            <a class="nav-link js-scroll-trigger" href="{% url 'substitutes_list' %}#subsitutes_section"">
                                 MES ALIMENTS<br>
                                 <img class="mx-auto d-block inverse-onScroll"  src="{% static 'dist/assets/img/noun_Carrot.png' %}" alt="MES ALIMENTS"  style="width: auto; height: 3em;">
                             </a>
@@ -101,11 +101,11 @@
                         <hr class="divider my-4" />
                     </div>
                     <div class="col-lg-10 align-self-baseline">
-                    <div class="card rounded text-white central-card" >
+                        <div class="card rounded text-white central-card" >
                       <!--   style="background-color: rgba(var(--biscuit),0.3);" -->
-                      <h5 class="card-header">
-                          Trouvez un produit de substitution pour ceux que vous consomez tout les jours.
-                      </h5>
+                          <h5 class="card-header">
+                              Trouvez un produit de substitution pour ceux que vous consomez tout les jours.
+                          </h5>
                           <div class="card-body">
                             <form class="input-group input-group-sm-mb-3 mx-auto" action="/products/results" method="get">
                                 <input type="search" name="query" placeholder="Produit" class="form-control searchInput ui-autocomplete-input" id="searchinput" autocomplete="off">
@@ -114,6 +114,19 @@
                           </div>
                         </div>
                     </div>
+
+                {% if messages %}
+                    <div class="col-lg-10 align-self-end text-white">
+                        <div class="messages">
+                          {% for message in messages %}
+                            {% if message.extra_tags == None %}
+                              <p class="{{ message.tags }}">{{ message }}</p>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
                 </div>
             </div>
         </header>

@@ -1,12 +1,14 @@
-from django.http import HttpResponse
-
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView
+from django.urls import reverse
+from django.contrib import messages
 from product import models as prd
 from substitute import models as sub
-from django.contrib.auth.models import User
+
 
 from django.db.models import Q
-from django.views.generic import DetailView
+# from django.views.generic import DetailView
 from django.shortcuts import render
 import pprint
 
@@ -25,7 +27,7 @@ class ListSubstitutesView(ListView):
     template_name = "product/query_substitutes.html"  # chemin vers le template à afficher
     model = prd.Product
     context_object_name = "substituts_trouves"
-    paginate_by = 5
+    paginate_by = 6
 
     def get_queryset(self):
         idProduct = self.request.GET.get("id")
@@ -33,6 +35,12 @@ class ListSubstitutesView(ListView):
             p_selection = prd.Product.objects.get(pk=idProduct)
             p_categories = p_selection.categories.all()
             p_nutrition_grade = p_selection.nutrition_grade
+
+
+            lst_cat_id = ",".join([str(cat.id) for cat in  p_categories])
+            print('id product origin: {}'.format(idProduct))
+            print('ids category: {}'.format(lst_cat_id))
+            print('nutrition grade lesser the: {}'.format(p_nutrition_grade))
 
             list_prod = prd.Product.objects.filter(
                 categories__in=p_categories,
@@ -56,14 +64,32 @@ def register_subsituts(request):
     idSubstitute = request.GET.get("sub")
     p_origin = prd.Product.objects.get(pk=idProduct)
     p_substitute = prd.Product.objects.get(pk=idSubstitute)
-    reg_sub = sub.Substitute.objects.create(
-        user_subst = request.user,
-        product_origin = p_origin,
-        product_substitute = p_substitute
-        )
 
-    return render(
-        request, "product/register_substitutes.html",
-        {"none": "none"}
-    )
+#    print('id prd :')
+#    pprint.pprint(idProduct)
+#    print('id subs :')
+#    pprint.pprint(idSubstitute)
+#    print('user :')
+#    pprint.pprint(request.user)
+
+    created = 'No'
+
+    try:
+        sub.Substitute.objects.get(
+            user_subst = request.user,
+            product_origin = p_origin,
+            product_substitute = p_substitute
+            )
+
+    except ObjectDoesNotExist:
+        sub.Substitute.objects.create(
+            user_subst = request.user,
+            product_origin = p_origin,
+            product_substitute = p_substitute
+            )
+        created = 'Yes'
+
+    reverse_url = reverse('home')
+    messages.info(request, 'Selection enregisrée')
+    return HttpResponseRedirect(reverse_url)
 

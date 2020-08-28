@@ -1,22 +1,7 @@
 {% extends 'pur_beurre/base.html' %}
-{% load urlparams %}
+{% load urlparams getcolor %}
 
 {% block content %}
-<script type='text/javascript'>
-// petite bidouille pour scroller sur le dashboard
-if(window.location.hash != null){
-    var hash = window.location.hash.substring(1);
-    if(hash !== "list_substitutes_section") {
-        window.location.replace("#");
-        // slice off the remaining '#' in HTML5:
-        if (typeof window.history.replaceState == 'function') {
-            history.replaceState({}, '', window.location.href.slice(0, -1));
-            }
-        location.replace('#list_substitutes_section');
-        window.location.reload( false );
-        }
-    }
-</script>
 <section class="page-section" id="list_substitutes_section">
 
     <div class="container">
@@ -34,57 +19,32 @@ if(window.location.hash != null){
         </div>
     </div>
 
-    <div class="product container">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Visuel</th>
-            <th>Nom</th>
-            <th>Nom générique</th>
-            <th>Code barre</th>
-            <th>Marque</th>
-            <th>Magasins</th>
-            <th>Nutrition grade</th>
-            <th>Lien OFF</th>
-            <th>Substitut</th>
-          </tr>
-        </thead>
-        <tbody>
-    {% for product in substituts_trouves %}
-            <tr>
-                <td class="col bg-info">
-                <img style="width: auto; height: 9em;" class="rounded" src="{{product.image_front_url}}"/>
-                </td>
-                <td>
-                {{ product.name }}
-                </td>
-                <td class="col bg-warning">
-                {{ product.generic_name|truncatewords_html:80 }}
-                </td>
-                <td>
-                {{ product.code }}
-                </td>
-                <td>
-                {{ product.brands }}
-                </td>
-                <td>
-                {{ product.stores }}
-                </td>
-                <td>
-                    <span class="badge-pill badge-info text-uppercase">
-                    {{ product.nutrition_grade }}
-                    </span>
-                </td>
-                <td>
-                <a href="{{ product.url }}">Descriptif OpenFoodsFacts</a>
-                </td>
-                <td>
-                <a href="{% url 'register_substituts' %}?{{ request.GET.urlencode }}&sub={{ product.id }}" class="btn btn-primary">Choisir ce substitut</a>
-                </td>
-            </tr>
-   {% endfor %}
-        </tbody>
-      </table>
+    <div class="subtitute container">
+        <div class="container">
+            <div class="row text-center">
+            {% for product in substituts_trouves %}
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="mt-5">
+                        <a href="{% url 'register_substituts' %}?{{ request.GET.urlencode }}&sub={{ product.id }}">
+                            <img style="width: auto; height: 9em;" class="img-fluid rounded" src="{{product.image_front_url}}"/>
+                            <span class="badge-pill badge-nutriscore text-uppercase"
+                                  style="background-color :{%  getcolor product.nutrition_grade %}; color :#000000">
+                                  {{ product.nutrition_grade }}
+                            </span>
+                            <div class="container-textproduct">
+                               <h6><strong>{{ product.name }}</strong></h6>
+                                <button class="btn btn-outline-dark">
+                                <i class="save_subst"><span> Sauvegarder </span></i>
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            {% endfor %}
+            </div>
+        </div>
     </div>
 
     {# Mise en forme de la pagination #}
@@ -108,5 +68,20 @@ if(window.location.hash != null){
     </div>
     {% endif %}
 </section>
+<script type='text/javascript'>
+// petite bidouille pour scroller sur le dashboard
+if(window.location.hash != null){
+    var hash = window.location.hash.substring(1);
+    if(hash !== "list_substitutes_section") {
+        window.location.replace("#");
+        // slice off the remaining '#' in HTML5:
+        if (typeof window.history.replaceState == 'function') {
+            history.replaceState({}, '', window.location.href.slice(0, -1));
+            }
+        location.replace('#list_substitutes_section');
+        window.location.reload( false );
+        }
+    }
+</script>
 
 {% endblock %}

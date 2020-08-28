@@ -24,10 +24,9 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='pur_beurre/home.html'), name='home'),
-#    path('substitute/', include('substitute.urls')),
+    path('substitutes/', include('substitute.urls')),
     path('products/', include('product.urls')),
     path(r"user/", include("user.urls")),
-#    path('admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:

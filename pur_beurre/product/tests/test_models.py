@@ -49,7 +49,6 @@ class ProductTestCase(TestCase):
             url='url002',
             nutrition_grade = 'A')
 
-
         p001.categories.add(dummy_cat)
         p002.categories.add(dummy_cat)
         p101.categories.add(dummy_cat)
@@ -96,7 +95,6 @@ class ProductTestCase(TestCase):
         pprint.pprint(raws)
         self.assertEqual(len(raws), 0)
 
-
         # p001 # worst score => 3 others are better
         p001 = prd.Product.objects.get(code='0000000000001')
         p001_categories = p001.categories.all()
@@ -127,6 +125,7 @@ class CategoryTestCase(TestCase):
             tag='tg0001',
             name='category 001',
             url='url001')
+
         cat2 = prd.Category.objects.get(
             tag='tg0002',
             name='category 002',

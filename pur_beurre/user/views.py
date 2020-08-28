@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from user.forms import CustomUserCreationForm
+from django.contrib.auth.models import User
 
 
 def dashboard_section(request, section='default'):
@@ -20,7 +21,7 @@ def dashboard(request):
 
 
 def user(request):
-    """ Exemple de page non valide au niveau HTML pour que l'exemple soit concis """
+    """ Exemple de page non valide """
     return HttpResponse("""
         <h1>Bienvenue sur lapage des users !</h1>
         <p>Les utilisateurs quoi !</p>
@@ -28,14 +29,21 @@ def user(request):
             
 
 def register(request):
+
     if request.method == "GET":
+        print("REGISTER GET :: {}".format("OK"))
+        initial_values = {}
+        if request.user is not None:
+            initial_values['username'] = request.user.username
+            initial_values['email'] = request.user.email
         return render(
             request, "user/register.html",
-            {"form": CustomUserCreationForm}
+            {"form": CustomUserCreationForm(initial=initial_values)}
         )
 
     elif request.method == "POST":
         form = CustomUserCreationForm(request.POST)
+        form.fields['username'].widget.render_value = True
         pprint.pprint(form)
         print("REGISTER :: {}".format("OK"))
         pprint.pprint(request.POST)
