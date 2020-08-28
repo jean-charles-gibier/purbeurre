@@ -33,7 +33,7 @@ def register(request):
     if request.method == "GET":
         print("REGISTER GET :: {}".format("OK"))
         initial_values = {}
-        if request.user is not None:
+        if request.user is not None and not request.user.is_anonymous:
             initial_values['username'] = request.user.username
             initial_values['email'] = request.user.email
         return render(
