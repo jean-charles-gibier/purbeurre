@@ -1,27 +1,8 @@
 {% extends 'pur_beurre/base.html' %}
 {% load urlparams %}
+{% load static %}
 
 {% block content %}
-<script type='text/javascript'>
-<!--
-// petite bidouille pour scroller sur le dashboard
-if(window.location.hash != null){
-    var hash = window.location.hash.substring(1);
-    if(hash !== "registred_substitutes_section") {
-        window.location.replace("#");
-        // slice off the remaining '#' in HTML5:
-        if (typeof window.history.replaceState == 'function') {
-            history.replaceState({}, '', window.location.href.slice(0, -1));
-            }
-        location.replace('#registred_substitutes_section');
-        window.location.reload( true );
-        }
-    } else {
-        location.replace('#registred_substitutes_section');
-        window.location.reload( true );
-    }
-    -->
-</script>
 <section class="page-section" id="registred_substitutes_section">
 
     <div style="text-align: center">
@@ -58,7 +39,7 @@ if(window.location.hash != null){
                 <td style="width: 10%">
                      <a href="{% url 'delete_substituts' %}?{{ request.GET.urlencode }}&origin={{ substitut.product_origin.id }}&sub={{ substitut.product_substitute.id }}"
                      class="btn btn-primary">
-                (Bouton suppr)
+                    <img src="{% static 'dist/assets/img/noun_Trash.png' %}" alt="DELETE" style="width: auto; height: 3em;"/>
                     </a>
                 </td>
             </tr>
@@ -88,5 +69,25 @@ if(window.location.hash != null){
     </div>
     {% endif %}
 </section>
+<script type='text/javascript'>
+<!--
+// petite bidouille pour scroller sur le dashboard
+if(window.location.hash != null){
+    var hash = window.location.hash.substring(1);
+    if(hash !== "registred_substitutes_section") {
+        window.location.replace("#");
+        // slice off the remaining '#' in HTML5:
+        if (typeof window.history.replaceState == 'function') {
+            history.replaceState({}, '', window.location.href.slice(0, -1));
+            }
+        location.replace('#registred_substitutes_section');
+        window.location.reload( true );
+        }
+    } else {
+        location.replace('#registred_substitutes_section');
+        window.location.reload( true );
+    }
+    -->
+</script>
 
 {% endblock %}
