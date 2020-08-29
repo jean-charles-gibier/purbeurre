@@ -34,8 +34,12 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
         DEBUG = False
     ALLOWED_HOSTS = ['yapb.herokuapp.com']
 else:
-    DEBUG = True
-    ALLOWED_HOSTS = []
+    if 'FORCE_DEBUG' in os.environ and os.environ['FORCE_DEBUG'] == 'NO':
+        DEBUG = False
+        ALLOWED_HOSTS = ['127.0.0.1']
+    else:
+        DEBUG = True
+        ALLOWED_HOSTS = []
 
 
 # Application definition

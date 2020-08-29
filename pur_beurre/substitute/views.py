@@ -1,5 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.utils.http import urlencode
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView
 from product import models as prd
 from substitute import models as sub

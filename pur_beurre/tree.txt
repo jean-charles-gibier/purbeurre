@@ -1,0 +1,281 @@
+D:.
+|   favicon.ico
+|   manage.py
+|   Procfile
+|   requirements.txt
+|   tree.txt
+|   __init__.old
+|   
++---core
+|   |   constant.py
+|   |   dbconnector.py
+|   |   dbconnector_mysql.py
+|   |   filler.py
+|   |   utils.py
+|   |   __init__.py
+|   |   
+|   +---dao
+|   |   |   daocategory.py
+|   |   |   daoproduct.py
+|   |   |   writer.py
+|   |   |   __init__.py
+|   |           
+|   +---downloader
+|   |   |   categorydownloader.py
+|   |   |   customrequest.py
+|   |   |   productdownloader.py
+|   |   |   __init__.py
+|   |           
+|   +---model
+|       |   category.py
+|       |   product.py
+|       |   __init__.py
+|           
++---product
+|   |   admin.py
+|   |   apps.py
+|   |   models.py
+|   |   urls.py
+|   |   views.py
+|   |   __init__.py
+|   |   
+|   +---dumps
+|   |       product.json
+|   |       
+|   +---management
+|   |   |   __init__.py
+|   |   |   
+|   |   +---commands
+|   |       |   filler.py
+|   |       |   purge.py
+|   |       |   __init__.py
+|   |               
+|   +---migrations
+|   |   |   0001_initial.py
+|   |   |   0002_auto_20200803_2138.py
+|   |   |   0003_product_nutrition_grade.py
+|   |   |   0004_auto_20200806_2336.py
+|   |   |   0005_auto_20200807_0022.py
+|   |   |   0006_auto_20200808_1518.py
+|   |   |   0007_product_image_front_url.py
+|   |   |   __init__.py
+|   |           
+|   +---static
+|   |       .gitignore
+|   |       
+|   +---templates
+|   |   \---product
+|   |           query_products.html
+|   |           query_substitutes.html
+|   |           register_substitutes.html
+|   |           
+|   +---templatetags
+|   |   |   getcolor.py
+|   |   |   urlparams.py
+|   |   |   __init__.py
+|   |           
+|   +---tests
+|       |   test_filler.py
+|       |   test_models.py
+|       |   __init__.py
+|               
+|           
++---pur_beurre
+|   |   asgi.py
+|   |   settings.py
+|   |   urls.py
+|   |   wsgi.py
+|   |   __init__.py
+|   |   
+|   +---dumps
+|   |       pur_beurre.json
+|   |       
+|   +---static
+|   |       .gitignore
+|   |       
+|   +---templates
+|           
++---static
+|   |   .editorconfig
+|   |   .travis.yml
+|   |   LICENSE
+|   |   package-lock.json
+|   |   package.json
+|   |   README.md
+|   |   
+|   +---dist
+|   |   |   index.html
+|   |   |   
+|   |   +---assets
+|   |   |   \---img
+|   |   |       |   bg-masthead.jpg
+|   |   |       |   colette-tatou-full.jpg
+|   |   |       |   favicon.ico
+|   |   |       |   logo_pur_beurre.png
+|   |   |       |   noun_Carrot.png
+|   |   |       |   noun_Enter.png
+|   |   |       |   noun_Exit.png
+|   |   |       |   noun_Trash.png
+|   |   |       |   noun_user_silhouette.png
+|   |   |       |   ratatouille-portrait.jpg
+|   |   |       |   
+|   |   |       \---portfolio
+|   |   |           +---fullsize
+|   |   |           |       1.jpg
+|   |   |           |       2.jpg
+|   |   |           |       3.jpg
+|   |   |           |       4.jpg
+|   |   |           |       5.jpg
+|   |   |           |       6.jpg
+|   |   |           |       
+|   |   |           \---thumbnails
+|   |   |                   1.jpg
+|   |   |                   2.jpg
+|   |   |                   3.jpg
+|   |   |                   4.jpg
+|   |   |                   5.jpg
+|   |   |                   6.jpg
+|   |   |                   
+|   |   +---css
+|   |   |       styles.css
+|   |   |       
+|   |   \---js
+|   |           scripts.js
+|   |           
+|   |           
+|   +---scripts
+|   |       build-assets.js
+|   |       build-pug.js
+|   |       build-scripts.js
+|   |       build-scss.js
+|   |       clean.js
+|   |       render-assets.js
+|   |       render-pug.js
+|   |       render-scripts.js
+|   |       render-scss.js
+|   |       sb-watch.js
+|   |       start-debug.js
+|   |       start.js
+|   |       
+|   \---src
+|       +---assets
+|       |   \---img
+|       |       |   bg-masthead.jpg
+|       |       |   colette-tatou-full.jpg
+|       |       |   favicon.ico
+|       |       |   logo_pur_beurre.png
+|       |       |   noun_Carrot.png
+|       |       |   noun_Enter.png
+|       |       |   noun_Exit.png
+|       |       |   noun_user_silhouette.png
+|       |       |   ratatouille-portrait.jpg
+|       |       |   
+|       |       \---portfolio
+|       |           +---fullsize
+|       |           |       1.jpg
+|       |           |       2.jpg
+|       |           |       3.jpg
+|       |           |       4.jpg
+|       |           |       5.jpg
+|       |           |       6.jpg
+|       |           |       
+|       |           \---thumbnails
+|       |                   1.jpg
+|       |                   2.jpg
+|       |                   3.jpg
+|       |                   4.jpg
+|       |                   5.jpg
+|       |                   6.jpg
+|       |                   
+|       +---js
+|       |       scripts.js
+|       |       
+|       +---pug
+|       |       index.pug
+|       |       
+|       \---scss
+|               styles.scss
+|               _global.scss
+|               _masthead.scss
+|               _navbar.scss
+|               _portfolio.scss
+|               _utilities.scss
+|               _variables.scss
+|               
++---substitute
+|   |   admin.py
+|   |   apps.py
+|   |   models.py
+|   |   urls.py
+|   |   views.py
+|   |   __init__.py
+|   |   
+|   +---dumps
+|   |       substitute.json
+|   |       
+|   +---migrations
+|   |   |   0001_initial.py
+|   |   |   0002_auto_20200808_1518.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           0001_initial.cpython-36.pyc
+|   |           0002_auto_20200808_1518.cpython-36.pyc
+|   |           __init__.cpython-36.pyc
+|   |           
+|   +---static
+|   |       .gitignore
+|   |       
+|   +---templates
+|   |   \---substitute
+|   |           registered_substitutes.html
+|   |           
+|   \---__pycache__
+|           admin.cpython-36.pyc
+|           apps.cpython-36.pyc
+|           models.cpython-36.pyc
+|           urls.cpython-36.pyc
+|           views.cpython-36.pyc
+|           __init__.cpython-36.pyc
+|           
++---templates
+|   |   .gitignore
+|   |   
+|   \---pur_beurre
+|           base.html
+|           home.html
+|           
+\---user
+    |   admin.py
+    |   apps.py
+    |   forms.py
+    |   models.py
+    |   urls.py
+    |   views.py
+    |   __init__.py
+    |   
+    +---dumps
+    +---migrations
+    |   |   0001_initial.py
+    |   |   0002_delete_user.py
+    |   |   __init__.py
+    |           
+    +---static
+    |       .gitignore
+    |       
+    +---templates
+        +---registration
+        |       logged_out.html
+        |       login.html
+        |       password_change_done.html
+        |       password_change_form.html
+        |       password_reset_complete.html
+        |       password_reset_confirm.html
+        |       password_reset_done.html
+        |       password_reset_email.html
+        |       password_reset_form.html
+        |       
+        \---user
+                dashboard.html
+                register.html
+            

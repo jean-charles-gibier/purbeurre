@@ -1,0 +1,13 @@
++---core
+|           
++---product
+|           
++---pur_beurre
+|           
++---static
+|               
++---substitute
+|           
++---templates
+|           
+\---user
