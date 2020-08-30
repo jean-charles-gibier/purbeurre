@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from user.forms import CustomUserCreationForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 
 def dashboard_section(request, section='default'):
@@ -23,8 +23,8 @@ def dashboard(request):
 def user(request):
     """ Exemple de page non valide """
     return HttpResponse("""
-        <h1>Bienvenue sur lapage des users !</h1>
-        <p>Les utilisateurs quoi !</p>
+        <h1>Bienvenue sur la page des users !</h1>
+        <p></p>
     """)
             
 
@@ -52,6 +52,7 @@ def register(request):
             user = form.save()
         else:
             messages.add_message(request, messages.ERROR, "Les données sont invalides. Veuillez saisir à nouveau les identifiants.")
+            print( "Les données sont invalides. Veuillez saisir à nouveau les identifiants.")
             return redirect(reverse('register'))
 
         print("REGISTER form.save() :: {}".format("OK"))
