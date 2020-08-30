@@ -4,12 +4,14 @@ from product import models as prd
 from substitute import models as sub
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 PAGINATE_BY_NB = 10
 
-#@login_required
-class ListRegisteredSubstitutes(ListView):
+
+class ListRegisteredSubstitutes(LoginRequiredMixin, ListView):
     template_name = "substitute/registered_substitutes.html"  # chemin vers les subtituts
+    login_url = '/user/login/'
     model = sub.Substitute
     context_object_name = "substituts_enregistres"
     paginate_by = PAGINATE_BY_NB
