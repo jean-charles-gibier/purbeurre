@@ -52,14 +52,13 @@ def register(request):
             user = form.save()
         else:
             messages.add_message(request, messages.ERROR, "Les données sont invalides. Veuillez saisir à nouveau les identifiants.")
-            print( "Les données sont invalides. Veuillez saisir à nouveau les identifiants.")
-            return redirect(reverse('register'))
+            return render(request, 'user/register.html', {'form': form})
+
+            # return redirect(reverse('register'))
 
         print("REGISTER form.save() :: {}".format("OK"))
-
         auth_login(request, user)
         print("REGISTER login(request, user) :: {}".format("OK"))
-
         url_reverse = reverse("dashboard")
         print("REGISTER reverse('dashboard) :: {}".format("OK"))
 

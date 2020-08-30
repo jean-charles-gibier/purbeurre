@@ -8,15 +8,15 @@
 <section class="page-section" id="register_section">
   <form class="form-signin rounded align-items-center" action="{% url 'register' %}#register_section" method="POST">
 
-    <div class="text-center ">
+    <div class="text-center">
       <img src="{% static 'dist/assets/img/logo_pur_beurre.png' %}" alt="" width="80" height="80">
       <h1 class="pb-2">Inscription</h1>
       {% if messages %}
-        {% for message in messages %}
-          <p class="text-danger -{{ message.tags }}">
-            {{ message }}
-          </p>
-        {% endfor %}
+      <div class="text-info">
+          {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+          {% endfor %}
+      </div>
       {% endif %}
       <div class="text-center mt-4">
         <p>Déjà inscrit ?<br>
@@ -26,13 +26,20 @@
     </div>
 
     {% csrf_token %}
-       <div class="container mx-auto">
-
      <div class="container mx-auto">
+
+        <p class="text-info">
+         {{ form.non_field_errors }}
+        </p>
+
     {% for field in form %}
       <div class="row">
         <div class="col-lg-2 offset-md-4">
-          {{ field.errors }}
+          <p class="text-info">
+            {% for error in field.errors %}
+              [{{ error }}]
+            {% endfor %}
+          </p>
           {{ field.label_tag }}
         </div>
         <div class="col-lg-2">
