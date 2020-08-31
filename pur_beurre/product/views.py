@@ -9,8 +9,8 @@ from substitute import models as sub
 
 from django.db.models import Q
 # from django.views.generic import DetailView
-from django.shortcuts import render
-import pprint
+# from django.shortcuts import render
+# import pprint
 
 class ListProductsView(ListView):
     template_name = "product/query_products.html"  # chemin vers le template à afficher

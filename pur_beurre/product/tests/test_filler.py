@@ -1,5 +1,5 @@
 from django.test import TestCase
-from user import models as usr
+# from user import models as usr
 from product import models as prd
 from core import filler as fil
 
