@@ -1,16 +1,14 @@
-import pytest
 import os
-import pprint
-BASE_DIR = \
-    os.sep.join(os.path.dirname(os.path.abspath(__file__)).split(os.sep)[:-2])
-os.environ["PATH"] += os.pathsep + os.path.join(BASE_DIR,'driver')
-
+import pytest
 from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
+BASE_DIR = \
+    os.sep.join(os.path.dirname(os.path.abspath(__file__)).split(os.sep)[:-2])
+os.environ["PATH"] += os.pathsep + os.path.join(BASE_DIR,'driver')
 
 @pytest.mark.skipif('DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION',
                     reason="requires production environement")
