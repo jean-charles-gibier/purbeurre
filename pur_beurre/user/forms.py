@@ -27,6 +27,10 @@ class CustomUserCreationForm(UserCreationForm):
     def clean(self):
         super(CustomUserCreationForm, self).clean()
         data = self.cleaned_data
+        if "password1" not in data:
+            data["password1"] = ""
+        if "password2" not in data:
+            data["password2"] = ""
         if data["password1"] != data["password2"]:
             raise forms.ValidationError({'password1': ["Les mots de passe doivent être identiques."]})
         return data

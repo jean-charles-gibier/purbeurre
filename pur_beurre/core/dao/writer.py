@@ -112,8 +112,8 @@ class Writer:
 #        cursor.execute('LOCK TABLES {} WRITE'.format(self._table_name))
         # TODO : Adapter 2 abstract layer mysql / pgsql / etc
         cursor.execute('LOCK TABLE {} IN ACCESS EXCLUSIVE MODE NOWAIT'.format(self._table_name))
-        print("====> {}".format(self._raw_insert_ignore_request))
-        print("====> {}".format(str(self._bulk_list)))
+        # print("====> {}".format(self._raw_insert_ignore_request))
+        # print("====> {}".format(str(self._bulk_list)))
         try:
             cursor.executemany(
                 self._raw_insert_ignore_request, self._bulk_list
