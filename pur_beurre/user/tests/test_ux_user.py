@@ -56,7 +56,7 @@ class AccountTestCase(LiveServerTestCase):
             str_sql = 'DELETE FROM "public"."auth_user" WHERE "username"={} and "email"={}'.format("'Jose'", "'Jose@dummies.com'")
             print("[{}]".format(str_sql))
             cursor.execute(str_sql)
-            print("Cursor execute status msg : {}".format(cur.statusmessage))
+            print("Cursor execute status msg : {}".format(cursor.statusmessage))
         except Exception as err:
             print("Failed cleaning datas : {}".format(err))
         cursor.close()
