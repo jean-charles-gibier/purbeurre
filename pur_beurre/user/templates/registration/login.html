@@ -51,9 +51,12 @@
 
   </form>
 </section>
+
+{% if not messages %}
 <script type='text/javascript'>
+
 // petite bidouille pour scroller sur le dashboard
-if(window.location.hash != null){
+if(false and window.location.hash != null){
     var hash = window.location.hash.substring(1);
     if(hash !== "login_section") {
         window.location.replace("#");
@@ -65,7 +68,9 @@ if(window.location.hash != null){
         window.location.reload( false );
         }
     }
+
 </script>
+{% endif %}
 
 {% endblock %}
 

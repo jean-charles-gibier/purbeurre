@@ -1,9 +1,6 @@
-# import pprint
-
 from django.db.models import Q
 from django.test import TestCase
 from product import models as prd
-import pprint
 
 class ProductTestCase(TestCase):
     def setUp(self):
@@ -90,9 +87,7 @@ class ProductTestCase(TestCase):
         p002_categories = p002.categories.all()
         p002_nutrition_grade = p002.nutrition_grade
 
-        pprint.pprint(p002_categories)
         raws = prd.Product.objects.filter(categories__in=p002_categories, nutrition_grade__lt=p002_nutrition_grade)
-        pprint.pprint(raws)
         self.assertEqual(len(raws), 0)
 
         # p001 # worst score => 3 others are better
@@ -100,9 +95,7 @@ class ProductTestCase(TestCase):
         p001_categories = p001.categories.all()
         p001_nutrition_grade = p001.nutrition_grade
 
-        pprint.pprint(p001_categories)
         raws = prd.Product.objects.filter(categories__in=p001_categories, nutrition_grade__lt=p001_nutrition_grade)
-        pprint.pprint(raws)
         self.assertEqual(len(raws), 3)
 
 

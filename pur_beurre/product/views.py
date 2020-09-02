@@ -64,14 +64,6 @@ def register_subsituts(request):
     idSubstitute = request.GET.get("sub")
     p_origin = prd.Product.objects.get(pk=idProduct)
     p_substitute = prd.Product.objects.get(pk=idSubstitute)
-
-#    print('id prd :')
-#    pprint.pprint(idProduct)
-#    print('id subs :')
-#    pprint.pprint(idSubstitute)
-#    print('user :')
-#    pprint.pprint(request.user)
-
     created = 'No'
 
     try:
