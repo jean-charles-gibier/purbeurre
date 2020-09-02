@@ -32,7 +32,7 @@ jobs:
       - python/install-deps
       - python/save-cache            
       - run:
-          command: cd pur_beurre && rm 'product/tests/test_ux_*.py' && python ./manage.py test
+          command: cd pur_beurre && rm product/tests/test_ux_\*.py && python ./manage.py test
           name: Test
 
 workflows:
