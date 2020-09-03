@@ -3,6 +3,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from product import models as prd
 from substitute import models as sub
 
@@ -11,6 +13,7 @@ from django.db.models import Q
 # from django.views.generic import DetailView
 # from django.shortcuts import render
 # import pprint
+
 
 class ListProductsView(ListView):
     template_name = "product/query_products.html"  # chemin vers le template à afficher
@@ -23,8 +26,10 @@ class ListProductsView(ListView):
         if my_query is not None:
             return prd.Product.objects.filter(Q(generic_name__icontains=my_query) | Q(brands__icontains=my_query))
 
-class ListSubstitutesView(ListView):
+
+class ListSubstitutesView(LoginRequiredMixin, ListView):
     template_name = "product/query_substitutes.html"  # chemin vers le template à afficher
+    login_url = '/user/login/'
     model = prd.Product
     context_object_name = "substituts_trouves"
     paginate_by = 6
