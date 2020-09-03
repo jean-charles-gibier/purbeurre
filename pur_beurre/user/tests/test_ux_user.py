@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from product import models as prd
 from core.dbconnector import DbConnector
 from django.contrib.auth.models import User
@@ -21,6 +22,8 @@ class AccountTestCase(LiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
+#        cap = DesiredCapabilities().FIREFOX
+#        cap["marionette"] = False
         super().setUpClass()
         cls.driver = webdriver.Firefox()
         cls.driver.implicitly_wait(10)

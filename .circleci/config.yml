@@ -20,10 +20,7 @@ jobs:
           name: install xvfb
           command: |
             apt-get update -q
-            apt-get install -q -y unzip xvfb
-      - install-firefox:
-          install-dir: /usr/local/bin
-          version: 66.0
+            apt-get install -q -y unzip xvfb firefox
       - restore_cache:
           key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
