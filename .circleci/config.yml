@@ -20,7 +20,7 @@ jobs:
           name: install xvfb
           command: |
             sudo apt-get update -q &&
-            sudo apt-get install -q -y unzip xvfb firefox
+            sudo apt-get install -q -y unzip xvfb firefox-esr
       - restore_cache:
           key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
