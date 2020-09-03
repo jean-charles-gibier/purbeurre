@@ -37,7 +37,7 @@ jobs:
       - python/install-deps
       - python/save-cache            
       - run: cd pur_beurre/driver && tar xvzf geckodriver-v0.27.0-linux64.tar.gz geckodriver
-      - run: xvfb-run -n 99 --server-args='-screen 0, 1024x768x24' firefox
+      - run: sudo xvfb-run -n 99 --server-args='-screen 0, 1024x768x24'
       - run:
           command: cd pur_beurre && export DJANGO_SETTINGS_MODULE=pur_beurre.settings && python ./manage.py test
           name: Test
