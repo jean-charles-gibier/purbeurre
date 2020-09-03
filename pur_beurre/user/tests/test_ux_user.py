@@ -26,6 +26,7 @@ class AccountTestCase(LiveServerTestCase):
 #        cap["marionette"] = False
         super().setUpClass()
         cls.driver = webdriver.Firefox()
+#        cls.driver = webdriver.Firefox(capabilities=cap)
         cls.driver.implicitly_wait(10)
 
     @classmethod
