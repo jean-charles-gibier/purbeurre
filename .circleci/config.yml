@@ -39,7 +39,7 @@ jobs:
       - run: cd pur_beurre/driver && tar xvzf geckodriver-v0.27.0-linux64.tar.gz geckodriver
       - run: cd pur_beurre/user/tests && cp ubuntu_test_ux_user.py test_ux_user.py
       - run:
-          command: cd pur_beurre && export DJANGO_SETTINGS_MODULE=pur_beurre.settings && xvfb-run -a -e /dev/stdout python ./manage.py test
+          command: xvfb-run -a -e /dev/stdout python cd pur_beurre && export DJANGO_SETTINGS_MODULE=pur_beurre.settings && ./manage.py test
           name: Test
 
 workflows:
