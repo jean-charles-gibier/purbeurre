@@ -41,7 +41,7 @@ jobs:
       - run: echo "cd pur_beurre/user/tests && cp ubuntu_test_ux_user.py test_ux_user.py"
       - run: echo "nohup Xvfb :99 -screen 0 1280x1024x24 esperluete"
       - run:
-          command: cd pur_beurre && rm user/tests/test_ux_product.py && python ./manage.py test
+          command: cd pur_beurre && rm user/tests/test_ux_user.py && python ./manage.py test
           name: Test
 
 workflows:
