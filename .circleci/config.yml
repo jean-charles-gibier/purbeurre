@@ -40,7 +40,7 @@ jobs:
       - run: cd pur_beurre/user/tests && cp ubuntu_test_ux_user.py test_ux_user.py
       - run: nohup Xvfb :99 -screen 0 1280x1024x24 &
       - run:
-          command: cd pur_beurre && export DJANGO_SETTINGS_MODULE=pur_beurre.settings && ./manage.py test
+          command: cd pur_beurre && export DJANGO_SETTINGS_MODULE=pur_beurre.settings && python ./manage.py test
           name: Test
 
 workflows:
