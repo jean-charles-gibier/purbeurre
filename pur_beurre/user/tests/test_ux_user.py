@@ -13,7 +13,7 @@ import time
 
 BASE_DIR = \
     os.sep.join(os.path.dirname(os.path.abspath(__file__)).split(os.sep)[:-2])
-os.environ["PATH"] += os.pathsep + os.path.join(BASE_DIR,'driver')
+os.environ["PATH"] += os.pathsep + os.path.join(BASE_DIR, 'driver')
 
 @pytest.mark.skipif('DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION',
                     reason="requires production environement")
