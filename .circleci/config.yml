@@ -43,8 +43,7 @@ jobs:
       - run:
           command: |
             cd pur_beurre &&
-            rm user/tests/test_ux_user.py &&
-            python ./manage.py test user.tests.test_ux_user product.tests.test_filler product.tests.test_models
+            python ./manage.py test user.tests.ubuntu_test_ux_user product.tests.test_filler product.tests.test_models
           name: Test
 
 workflows:
