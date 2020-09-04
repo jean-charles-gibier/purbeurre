@@ -46,7 +46,7 @@ jobs:
       - run:
           command: |
             cd pur_beurre &&
-            xvfb-run python ./manage.py user.tests.ubuntu_test_ux_user
+            xvfb-run python ./manage.py test user.tests.ubuntu_test_ux_user
           name: TestSelenium
       - run: ls -lart /tmp
 
