@@ -1,8 +1,23 @@
-from django.core.management.base import BaseCommand, CommandError
+"""
+Composant du projet P5
+filler est la classe chargée d'alimenter
+ la base de donnée nativement
+a partir du connecteur db msql ou pg
+"""
+
 from core import filler as fil
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
+    """
+    la commande filler alimente la base
+    Parametre :
+        nb_products
+    10000 par defaut pour un calibrage
+    adapté aux conditions d'heregement
+    gratuit sur Heroku
+    """
     help = 'Fills the current model via OFF'
 
     def add_arguments(self, parser):
@@ -16,6 +31,3 @@ class Command(BaseCommand):
 
         fil.Filler().start(limit_nb_products)
         pass
-
-
-

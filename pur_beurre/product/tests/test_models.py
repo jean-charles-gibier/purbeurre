@@ -100,6 +100,7 @@ class ProductTestCase(TestCase):
 
 class CategoryTestCase(TestCase):
     def setUp(self):
+        """ prepare items for test """
         prd.Category.objects.create(
             tag='tg0001',
             name='category 001',

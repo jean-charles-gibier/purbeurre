@@ -1,8 +1,10 @@
-from django.urls import path, include, reverse, re_path
-from .views import dashboard, login, register, dashboard_section
+"""
+Routes user
+"""
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
-# from user.views import dashboard
+from django.urls import path, include, re_path
+
+from .views import dashboard, login, register, dashboard_section
 
 urlpatterns = [
     path(r"accounts/", include("django.contrib.auth.urls")),

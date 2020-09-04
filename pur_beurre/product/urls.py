@@ -1,6 +1,6 @@
-from django.urls import path, include, re_path
-from .views import ListProductsView, ListSubstitutesView, register_subsituts
+from django.urls import re_path
 
+from .views import ListProductsView, ListSubstitutesView, register_subsituts
 
 urlpatterns = [
     re_path(r"results?",

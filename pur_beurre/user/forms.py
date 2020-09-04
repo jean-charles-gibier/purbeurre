@@ -1,13 +1,20 @@
-# users/forms.py
+"""
+Gestion des formulaires
+enregistrement / validation des données utilistateur
+"""
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 
 class CustomUserCreationForm(UserCreationForm):
+    """
+    Utilsation du formulaire standard
+    avec ajout du champ 'email'
+    """
+
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ("email",)
-
-
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -21,7 +28,8 @@ class CustomUserCreationForm(UserCreationForm):
         password2 = self.cleaned_data.get('password2')
         if password1 and password2 and password1 != password2:
             print('Les mots de passe ne correspondent pas. Veuillez les saisir à nouveau.')
-            raise forms.ValidationError('Les mots de passe ne correspondent pas. Veuillez les saisir à nouveau.', code='invalid')
+            raise forms.ValidationError('Les mots de passe ne correspondent pas. Veuillez les saisir à nouveau.',
+                                        code='invalid')
         return password2
 
     def clean(self):

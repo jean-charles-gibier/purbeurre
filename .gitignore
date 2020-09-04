@@ -23,3 +23,9 @@ pur_beurre/user/migrations/__pycache__/0001_initial.cpython-36.pyc
 /.coverage
 /pur_beurre/errors
 /pur_beurre/geckodriver.log
+/pur_beurre/driver/geckodriver-v0.27.0-linux64.tar.gz
+/pur_beurre/driver/geckodriver.exe
+/pur_beurre/driver/svg
+/pur_beurre/driver/geckodriver_ubuntu
+/pur_beurre/driver/geckodriver-v0.27.0-linux64.tar
+/pur_beurre/driver/geckodriver-v0.27.0-win64.zip

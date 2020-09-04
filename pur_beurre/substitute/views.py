@@ -1,15 +1,23 @@
+"""
+Modeles dependants de la classe subtitut
+Liste et suppression
+"""
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import ListView
 from product import models as prd
 from substitute import models as sub
-from django.urls import reverse
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 PAGINATE_BY_NB = 10
 
 
 class ListRegisteredSubstitutes(LoginRequiredMixin, ListView):
+    """
+    liste des subsituts enregistrés
+    acces limité a l'utilistateur enregistré
+    """
     template_name = "substitute/registered_substitutes.html"  # chemin vers les subtituts
     login_url = '/user/login/'
     model = sub.Substitute
@@ -19,21 +27,28 @@ class ListRegisteredSubstitutes(LoginRequiredMixin, ListView):
     def get_queryset(self):
         current_user = self.request.user
         if current_user is not None:
-            return sub.Substitute.objects.filter(user_subst = current_user)
+            return sub.Substitute.objects.filter(user_subst=current_user)
 
 
 @login_required
 def delete_substituts(request):
+    """
+    Suppression d'une substitution
+    avec gestion du positionnement de la page
+    courrante (si suppression du dernier element d'une page)
+    :param request:
+    :return: HttpResponse
+    """
     idProduct = request.GET.get("origin")
     idSubstitute = request.GET.get("sub")
     p_origin = prd.Product.objects.get(pk=idProduct)
     p_substitute = prd.Product.objects.get(pk=idSubstitute)
 
-    sub.Substitute.objects.filter (
-        user_subst = request.user,
-        product_origin = p_origin,
-        product_substitute = p_substitute
-        ).delete()
+    sub.Substitute.objects.filter(
+        user_subst=request.user,
+        product_origin=p_origin,
+        product_substitute=p_substitute
+    ).delete()
 
     # check if it is the last row on the last page
     value_page = request.GET.get("page")
