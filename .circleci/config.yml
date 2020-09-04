@@ -37,11 +37,11 @@ jobs:
       - python/install-deps
       - python/save-cache            
       - run: cd pur_beurre/driver && tar xvzf geckodriver-v0.27.0-linux64.tar.gz geckodriver
-      - run: nohup Xvfb :99 -screen 0 1280x1024x24 &
+      - run: echo "nohup Xvfb :99 -screen 0 1280x1024x24 esperluette"
       - run:
           command: |
             cd pur_beurre &&
-            python ./manage.py test user.tests.ubuntu_test_ux_user product.tests.test_filler product.tests.test_models
+            xvfb-run python ./manage.py test user.tests.ubuntu_test_ux_user product.tests.test_filler product.tests.test_models
           name: Test
 
 workflows:
