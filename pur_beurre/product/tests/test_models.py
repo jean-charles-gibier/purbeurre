@@ -2,9 +2,9 @@ from django.db.models import Q
 from django.test import TestCase
 from product import models as prd
 
+
 class ProductTestCase(TestCase):
     def setUp(self):
-
         dummy_cat = prd.Category.objects.create(
             tag='tg0000',
             name='category 000',
@@ -17,7 +17,7 @@ class ProductTestCase(TestCase):
             brands='Coca',
             stores='stores001',
             url='url001',
-            nutrition_grade = 'C')
+            nutrition_grade='C')
 
         p102 = prd.Product.objects.create(
             code='1000000000002',
@@ -26,7 +26,7 @@ class ProductTestCase(TestCase):
             brands='cola',
             stores='stores001',
             url='url001',
-            nutrition_grade = 'D')
+            nutrition_grade='D')
 
         p001 = prd.Product.objects.create(
             code='0000000000001',
@@ -35,7 +35,7 @@ class ProductTestCase(TestCase):
             brands='Brand of prd 001',
             stores='stores001',
             url='url001',
-            nutrition_grade = 'E')
+            nutrition_grade='E')
 
         p002 = prd.Product.objects.create(
             code='0000000000002',
@@ -44,7 +44,7 @@ class ProductTestCase(TestCase):
             brands='Brand of prd 002',
             stores='stores002',
             url='url002',
-            nutrition_grade = 'A')
+            nutrition_grade='A')
 
         p001.categories.add(dummy_cat)
         p002.categories.add(dummy_cat)
@@ -72,14 +72,13 @@ class ProductTestCase(TestCase):
         self.assertEqual(prd1.code, '0000000000001')
         self.assertEqual(prd2.code, '0000000000002')
 
-    def test_products_like_ (self):
+    def test_products_like_(self):
         """Test search products where attrbute
         'name' or 'brand' like cola"""
         raws = prd.Product.objects.filter(Q(generic_name__icontains='cola') | Q(brands__icontains='cola'))
         self.assertEqual(len(raws), 2)
 
-
-    def test_products_like_with_better_score (self):
+    def test_products_like_with_better_score(self):
         """Test search product wihh same catecgory
         but with a better score """
         # p002 # best score => no one better => 0 results
@@ -97,7 +96,6 @@ class ProductTestCase(TestCase):
 
         raws = prd.Product.objects.filter(categories__in=p001_categories, nutrition_grade__lt=p001_nutrition_grade)
         self.assertEqual(len(raws), 3)
-
 
 
 class CategoryTestCase(TestCase):
@@ -126,4 +124,3 @@ class CategoryTestCase(TestCase):
 
         self.assertEqual(cat1.tag, 'tg0001')
         self.assertEqual(cat2.tag, 'tg0002')
-

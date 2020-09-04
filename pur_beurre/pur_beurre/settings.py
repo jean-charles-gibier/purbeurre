@@ -24,6 +24,7 @@ print("BASE_DIR :: {}".format(BASE_DIR))
 SECRET_KEY = '^+%82556f9ka=e3q!z67#fxr1br1y*ds80)@+7=&u^*nr*hb@('
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ['SECRET_KEY']
+print('secret key :{}'.format(len(SECRET_KEY)))
 
 ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!

@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-# from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from product import models as prd
 from core.dbconnector import DbConnector
 from django.contrib.auth.models import User
@@ -22,11 +21,8 @@ class AccountTestCase(LiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
-#        cap = DesiredCapabilities().FIREFOX
-#        cap["marionette"] = False
         super().setUpClass()
         cls.driver = webdriver.Firefox()
-#        cls.driver = webdriver.Firefox(capabilities=cap)
         cls.driver.implicitly_wait(10)
 
     @classmethod
@@ -187,5 +183,4 @@ class AccountTestCase(LiveServerTestCase):
                 EC.presence_of_element_located((((By.XPATH, "//p[contains(@class, 'danger') and contains(text(), 'Veuillez saisir à nouveau vos identifiants ou créer un compte')]")))))
         except:
             assert(1 == 0)
-
 
