@@ -12,16 +12,38 @@ class TestFormsUsers(TestCase):
             'password1': 'Abcz1198!',
             'password2': 'Abcz1198!'
         }
+
+        self.user_register_wrong_pw = {
+            'username': 'user_name',
+            'email': 'name@free.fr',
+            'password1': 'Zzzzzzzz!',
+            'password2': 'Abcz1198!'
+        }
+
         self.user_login = {
             'username': 'username',
             'password': 'Abcz1198!'
         }
 
     def test_regForm_is_valid(self):
+        """
+        data correct
+        :return: true
+        """
         data = self.user_register
         form = CustomUserCreationForm(data)
         is_valid = form.is_valid()
         self.assertTrue(is_valid)
+
+    def test_regForm_is_not_valid(self):
+        """
+        Pb password incorrect
+        :return: false
+        """
+        data = self.user_register_wrong_pw
+        form = CustomUserCreationForm(data)
+        is_valid = form.is_valid()
+        self.assertFalse(is_valid)
 
     def test_logForm_is_not_valid(self):
         data = self.user_login
