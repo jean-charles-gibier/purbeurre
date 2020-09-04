@@ -26,6 +26,12 @@
     margin: 0 auto;
 }
 
+.form-centered {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
 .badge-nutriscore {
   position: absolute;
   right: 22%;
@@ -59,3 +65,4 @@
   background-color: #FF0000;
   color: rgba(46, 39, 49);
 }
+

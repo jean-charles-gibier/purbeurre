@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from user.forms import CustomUserCreationForm
-import time
+
 
 def dashboard_section(request, section='default'):
     print("DASHBOARD :: section : {}".format(section))

@@ -4,7 +4,7 @@
 {% block content %}
 
 <section class="page-section" id="login_section">
-  <form class="form-signin rounded align-items-center" action="{% url 'login' %}" method="POST">
+  <form class="form-signin rounded align-items-center form-centered" action="{% url 'login' %}" method="POST">
 
     <div class="text-center">
       <img src="{% static 'dist/assets/img/logo_pur_beurre.png' %}" alt="" width="80" height="80">
@@ -29,15 +29,15 @@
     <div class="container mx-auto">
     {% for field in form %}
       <div class="row">
-        <div class="col-lg-2 offset-md-4">
+        <div class="col-lg-2 offset-md-4" style="display: flex; flex-direction: column; justify-content: center;">
           {{ field.errors }}
           {{ field.label_tag }}
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="display: flex; flex-direction: column; justify-content: center;">
           {{ field }}
         </div>
           {% if field.help_text %}
-          <div class="col">
+          <div class="col" style="display: flex; flex-direction: column; justify-content: center;">
             <p class="help">{{ field.help_text|safe }}</p>
           </div>
           {% endif %}

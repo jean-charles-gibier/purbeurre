@@ -40,5 +40,6 @@ class CustomUserCreationForm(UserCreationForm):
         if "password2" not in data:
             data["password2"] = ""
         if data["password1"] != data["password2"]:
+            print('Les mots de passe doivent être identiques !')
             raise forms.ValidationError({'password1': ["Les mots de passe doivent être identiques."]})
         return data
