@@ -20,8 +20,8 @@ jobs:
           name: install xvfb
           command: |
             sudo apt-get update -q &&
-            apt-cache show firefox | grep Version &&
-            sudo apt-get install -q -y unzip xvfb firefox=59.0.2+build1-0ubuntu1
+            sudo apt-cache show firefox | grep Version &&
+            echo "sudo apt-get install -q -y unzip xvfb firefox=59.0.2+build1-0ubuntu1"
       - restore_cache:
           key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
