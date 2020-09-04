@@ -20,8 +20,7 @@ jobs:
           name: install xvfb
           command: |
             sudo apt-get update -q &&
-            sudo apt-cache show firefox-esr  | grep Version &&
-            echo "sudo apt-get install -q -y unzip xvfb firefox=59.0.2+build1-0ubuntu1"
+            sudo apt-get install -q -y unzip xvfb firefox-esr= 52.8.1esr-1~deb8u1
       - restore_cache:
           key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
