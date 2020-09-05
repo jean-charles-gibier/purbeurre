@@ -160,4 +160,4 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
     
 # awesome_website/settings.py
 LOGIN_REDIRECT_URL = "dashboard"
-
+# AUTH_USER_MODEL = 'user.CustomUser'

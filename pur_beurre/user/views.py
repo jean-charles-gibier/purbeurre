@@ -53,6 +53,10 @@ def register(request):
 
 
 def login(request):
+    """
+    :param request:
+    :return: render ok => dashboard  ko =>  login
+    """
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
         username = request.POST['username']
