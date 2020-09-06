@@ -15,6 +15,9 @@ class EmailBackend(BaseBackend):
                 return user # return user to be authenticated
 
         except user_model.DoesNotExist: # no matching user exists
+            messages.add_message(
+                request, messages.ERROR, "L'email et/ou le mot de passe sont invalides. Veuillez saisir à"
+                                         " nouveau vos identifiants ou créer un compte.")
             return None
 
     def get_user(self, user_id):
@@ -23,3 +26,5 @@ class EmailBackend(BaseBackend):
             return user_model.objects.get(pk=user_id)
         except user_model.DoesNotExist:
             return None
+
+

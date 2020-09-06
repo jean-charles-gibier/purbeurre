@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 
 import pprint
 
-
 class CustomUserCreationForm(UserCreationForm):
     """
     Utilsation du formulaire standard
