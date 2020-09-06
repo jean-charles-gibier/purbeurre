@@ -12,13 +12,16 @@ Git clone de ce projet + tests + migrations
 
 ````
 pip install -r requirements.txt
-export SECRET_KEY=`python -c 'import random, string; print("".join([random.choice(string.printable) for _ in range(24)]))'`
-export CODECOV_TOKEN=9db8d8a5-bd6d-40c2-a691-fc5d1b830f21
 # pour purger la base
 python ./manage.py purge
 # pour alimenter la base 
 python ./manage.py filler 4000
 ````
 
+(Ici on importe 4000 produits de OpenFoodFacts + 4000 associations avec une dizaine de catégories) 
+
 Admin local :<br>
     127.0.0.1:8000/user/admin/
+    
+ 
+    
