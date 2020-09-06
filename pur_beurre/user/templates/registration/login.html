@@ -52,11 +52,11 @@
   </form>
 </section>
 
-{% if not messages %}
+{% if not user.is_authenticated %}
 <script type='text/javascript'>
 
 // petite bidouille pour scroller sur le dashboard
-if(false and window.location.hash != null){
+if(window.location.hash != null){
     var hash = window.location.hash.substring(1);
     if(hash !== "login_section") {
         window.location.replace("#");
