@@ -135,7 +135,7 @@ class AccountTestCase(LiveServerTestCase):
         time.sleep(10)
 
         username = self.driver.find_element_by_id('id_username')
-        username.send_keys('Jose')
+        username.send_keys('Jose@dummies.com')
         self.driver.implicitly_wait(5)
 
         password = self.driver.find_element_by_id('id_password')

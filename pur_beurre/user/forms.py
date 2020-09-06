@@ -3,8 +3,10 @@ Gestion des formulaires
 enregistrement / validation des données utilistateur
 """
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+
+import pprint
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -43,3 +45,10 @@ class CustomUserCreationForm(UserCreationForm):
             print('Les mots de passe doivent être identiques !')
             raise forms.ValidationError({'password1': ["Les mots de passe doivent être identiques."]})
         return data
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+
+     def __init__(self, *args, **kwargs):
+         super(CustomAuthenticationForm, self).__init__(*args, **kwargs)
+         self.fields['username'].label = 'Email utilisateur'
