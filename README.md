@@ -4,7 +4,7 @@ status : [![CircleCI](https://circleci.com/gh/jean-charles-gibier/PurBeurre.svg?
 Projet 8 DaPy
 
  La société "Pur beurre" souhaite un site dont les exigences sont décrites dans 
- [le document suivant :](https://openclassrooms.com/fr/paths/68/projects/159/assignment)
+ le document suivant : [Brief P8](https://openclassrooms.com/fr/paths/68/projects/159/assignment)
 
 
 installation:
