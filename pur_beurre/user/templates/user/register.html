@@ -10,20 +10,24 @@
 
     <div class="text-center">
       <img src="{% static 'dist/assets/img/logo_pur_beurre.png' %}" alt="" width="80" height="80">
+      {% if user.is_authenticated %}
+      <h1 class="pb-2">Informations personnelles</h1>
+      {% else %}
       <h1 class="pb-2">Inscription</h1>
-      {% if messages %}
-      <div class="text-info">
-          {% for message in messages %}
-        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-          {% endfor %}
-      </div>
+        {% if messages %}
+        <div class="text-info">
+            {% for message in messages %}
+          <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="text-center mt-4">
+          <p>Déjà inscrit ?<br>
+            <a href="{% url 'login' %}#login_section" class="btn btn-primary">Connectez-vous</a>
+          </p>
+        </div>
       {% endif %}
-      <div class="text-center mt-4">
-        <p>Déjà inscrit ?<br>
-          <a href="{% url 'login' %}#login_section" class="btn btn-primary">Connectez-vous</a>
-        </p>
       </div>
-    </div>
 
     {% csrf_token %}
      <div class="container mx-auto">
