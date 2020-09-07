@@ -73,7 +73,7 @@ class AccountTestCase(LiveServerTestCase):
 
         try:
             submit = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((((By.XPATH, "//button[@type='submit' and text()='Créer le compte']")))))
+                EC.presence_of_element_located((((By.XPATH, "//button[@type='submit' and contains(text(), 'Créer le compte')]")))))
             submit.click()
         except:
             self.assertIsNotNone(submit)
@@ -89,6 +89,14 @@ class AccountTestCase(LiveServerTestCase):
         """  crée un user existant pour le test
         on ne vérifie juste que le msg d'erreur
         concernant l'adresse mail deja utilisée """
+        # dans le doute on clique sur deconnexion
+        try:
+            dconx = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((((By.XPATH, "//a[contains(text(), 'DECONNEXION')]")))))
+            dconx.click()
+        except:
+            self.assertIsNotNone(dconx)
+                                         
         time.sleep(10)
         self.driver.get(self.live_server_url + '/user/register/')
         time.sleep(10)
@@ -115,7 +123,7 @@ class AccountTestCase(LiveServerTestCase):
 
         try:
             submit = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((((By.XPATH, "//button[@type='submit' and text()='Créer le compte']")))))
+                EC.presence_of_element_located((((By.XPATH, "//button[@type='submit' and contains(text(), 'Créer le compte')]")))))
             submit.click()
         except:
             self.assertIsNotNone(submit)
