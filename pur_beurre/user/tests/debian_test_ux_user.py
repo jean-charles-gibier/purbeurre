@@ -129,7 +129,7 @@ class AccountTestCase(LiveServerTestCase):
             self.assertIsNotNone(submit)
 
         try:
-              test = WebDriverWait(self.driver, 100).until(
+            test = WebDriverWait(self.driver, 100).until(
                 EC.presence_of_element_located((((By.XPATH, "//p[contains(@class, 'text-info') and contains(text(), '[Un utilisateur avec ce nom existe déjà.]')]")))))
         except:
             assert(1 == 0)
