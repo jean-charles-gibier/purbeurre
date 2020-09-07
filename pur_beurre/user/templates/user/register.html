@@ -56,7 +56,13 @@
 
 
     <div class="text-center">
-      <button class="btn btn-primary mt-4" type="submit">Créer le compte</button>
+      <button class="btn btn-primary mt-4" type="submit">
+        {% if user.is_authenticated %}
+        Modifier le compte
+        {% else %}
+        Créer le compte
+        {% endif %}
+      </button>
     </div>
 
   </form>
