@@ -17,6 +17,8 @@ class CustomUserCreationForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
+        # TODO : Pour la modification la vérification ne doit se faire
+        # uniquement que si le user courant est de type anonyme
         if User.objects.filter(email=email):
             print('Cet email est déjà utilisé. Veuillez recommencer.')
             raise forms.ValidationError('Cet email est déjà utilisé. Veuillez recommencer.', code='invalid')
