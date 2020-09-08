@@ -25,16 +25,16 @@ Admin local :<br>
 <br/>    
 Test coverage courant :
  ````
-(venv) D:\github\PurBeurre_switch\pur_beurre>coverage run --source='.' manage.py test core.tests.test_config core.tests.test_core  product.tests.test_filler product.tests.test_models product.tests.test_ux_product pur_beurre.tests.test_statics_pages user.tests.test_forms user.tests.test_ux_user
+(venv) D:\path\to\PurBeurre\pur_beurre>coverage run --source='.'  manage.py test core.tests.test_config core.tests.test_core  product.tests.test_filler product.tests.test_models product.tests.test_ux_product pur_beurre.tests.test_statics_pages user.tests.test_forms user.tests.test_ux_user pur_beurre.tests.test_manager
  ````
 
 Puis :
  ````
-venv) D:\path\to\PurBeurre\pur_beurre>coverage report 
+(venv) D:\path\to\PurBeurre\pur_beurre>coverage report 
 ````
 
 ````
-(venv) D:\github\OCR\Win\PurBeurre_switch\pur_beurre>coverage report
+(venv) D:\path\to\PurBeurre\pur_beurre
 Name                                                 Stmts   Miss  Cover
 ------------------------------------------------------------------------
 __init__.py                                              0      0   100%
