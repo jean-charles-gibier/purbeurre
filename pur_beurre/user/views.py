@@ -23,7 +23,7 @@ def user(request):
         <h1>Bienvenue sur la page des users !</h1>
         <p></p>
     """)
-            
+
 
 def register(request):
 
@@ -44,7 +44,10 @@ def register(request):
         if form.is_valid():
             user = form.save()
         else:
-            messages.add_message(request, messages.ERROR, "Les données sont invalides. Veuillez saisir à nouveau les identifiants.")
+            messages.add_message(request, messages.ERROR,
+                                 "Les données sont invalides."
+                                 " Veuillez saisir à nouveau les "
+                                 "identifiants.")
             return render(request, 'user/register.html', {'form': form})
 
         auth_login(request, user)
@@ -67,14 +70,17 @@ def login(request):
             if user.is_active:
                 auth_login(request, user)
             else:
-                messages.add_message(request, messages.ERROR, "Compte désactivé.")
+                messages.add_message(request,
+                                     messages.ERROR,
+                                     "Compte désactivé.")
         else:
             messages.add_message(
-                request, messages.ERROR, "L'email et/ou le mot de passe sont invalides. Veuillez saisir à"
-                                         " nouveau vos identifiants ou créer un compte.")
+                request, messages.ERROR, "L'email et/ou le mot de passe "
+                                         "sont invalides. Veuillez saisir à"
+                                         " nouveau vos identifiants ou "
+                                         "créer un compte.")
             return render(request, 'registration/login.html', {'form': form})
         return redirect(reverse('dashboard'))
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
-

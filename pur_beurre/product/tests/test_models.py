@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from django.db.models import Q
 from django.test import TestCase
 from product import models as prd
@@ -5,6 +7,11 @@ from product import models as prd
 
 class ProductTestCase(TestCase):
     def setUp(self):
+        """
+        prepare a bunch of products
+        categories etc.
+        :return:
+        """
         dummy_cat = prd.Category.objects.create(
             tag='tg0000',
             name='category 000',
@@ -75,7 +82,8 @@ class ProductTestCase(TestCase):
     def test_products_like_(self):
         """Test search products where attrbute
         'name' or 'brand' like cola"""
-        raws = prd.Product.objects.filter(Q(generic_name__icontains='cola') | Q(brands__icontains='cola'))
+        raws = prd.Product.objects.filter(Q(generic_name__icontains='cola')
+                                          | Q(brands__icontains='cola'))
         self.assertEqual(len(raws), 2)
 
     def test_products_like_with_better_score(self):
@@ -86,7 +94,9 @@ class ProductTestCase(TestCase):
         p002_categories = p002.categories.all()
         p002_nutrition_grade = p002.nutrition_grade
 
-        raws = prd.Product.objects.filter(categories__in=p002_categories, nutrition_grade__lt=p002_nutrition_grade)
+        raws = prd.Product.objects.filter(
+            categories__in=p002_categories,
+            nutrition_grade__lt=p002_nutrition_grade)
         self.assertEqual(len(raws), 0)
 
         # p001 # worst score => 3 others are better
@@ -94,7 +104,9 @@ class ProductTestCase(TestCase):
         p001_categories = p001.categories.all()
         p001_nutrition_grade = p001.nutrition_grade
 
-        raws = prd.Product.objects.filter(categories__in=p001_categories, nutrition_grade__lt=p001_nutrition_grade)
+        raws = prd.Product.objects.filter(
+            categories__in=p001_categories,
+            nutrition_grade__lt=p001_nutrition_grade)
         self.assertEqual(len(raws), 3)
 
 

@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 import pytest
 from django.test import LiveServerTestCase
@@ -5,9 +6,6 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from product import models as prd
-from core.dbconnector import DbConnector
-from django.contrib.auth.models import User
 import time
 
 BASE_DIR = \

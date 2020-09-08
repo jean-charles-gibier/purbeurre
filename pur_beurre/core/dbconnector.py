@@ -4,24 +4,22 @@ Connection stuff
  pg connector
 """
 import json
-from pprint import pprint
-
 import psycopg2
-from core import constant
 from django.conf import settings
+
 
 class DbConnector(object):
     """ un instance = un handle"""
-    def __init__(self, pathcfg = None):
+    def __init__(self, pathcfg=None):
         """ Init 1 connexion/session pour 1 objet DbConnector instancié """
-        if pathcfg is not None :
+        if pathcfg is not None:
             with open(pathcfg) as file_cfg:
                 self._handle = psycopg2.connect(
                     **json.load(file_cfg)
                 )
         else:
             test_cfg = getattr(settings, "DATABASES", None)
-            if test_cfg is not None and 'default' in test_cfg :
+            if test_cfg is not None and 'default' in test_cfg:
                 cfg = test_cfg['default']
                 self._handle = psycopg2.connect(
                         dbname=cfg['NAME'],

@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Test de la commande d'administration filler
 """

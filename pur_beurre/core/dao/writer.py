@@ -2,13 +2,7 @@
 import logging as lg
 import sys
 import re
-
-# import mysql
-# from psycopg2 import connect
-
-# import the error handling libraries for psycopg2
-# from psycopg2 import OperationalError, errorcodes, errors
-import psycopg2
+# import psycopg2
 from core.dbconnector import DbConnector
 
 logger = lg.getLogger(__name__)
@@ -29,9 +23,11 @@ class Writer:
         """ table name """
         self._table_name = table_name
         """ insert (ignore) pattern """
-        # TODO
-        # self._raw_insert_ignore_pattern = "insert ignore into %s %s values %s %s"
-        self._raw_insert_ignore_pattern = "insert into %s %s values %s %s ON CONFLICT DO NOTHING"
+        # TODO verifier compatibilté mysql
+        # self._raw_insert_ignore_pattern
+        # = "insert ignore into %s %s values %s %s"
+        self._raw_insert_ignore_pattern =\
+            "insert into %s %s values %s %s ON CONFLICT DO NOTHING"
         """ request raw insertion """
         self._raw_insert_ignore_request = ""
         """ columns names for insert """
@@ -68,22 +64,26 @@ class Writer:
                     self.add_row(an_instance)
             except:
                 json_list.pop(idx)
-                logger.error('[%s] Ne peut enregistrer #%s', sys.exc_info()[0], str(some))
+                logger.error('[%s] Ne peut enregistrer #%s',
+                             sys.exc_info()[0], str(some))
 
         return json_list
 
     def _build_raw_request(self, mode, where_clause=None):
         """ build insert request
         mode :
-        1 : PLACEHOLDER_MODE => requête 'executemany' avec placeholder "python_connector"
-        2 : INLINE_MODE "sql natif" => requête 'execute' avec sql standard (requête "in extenso")
+        1 : PLACEHOLDER_MODE => requête 'executemany'
+            avec placeholder "python_connector"
+        2 : INLINE_MODE "sql natif" => requête 'execute'
+            avec sql standard (requête "in extenso")
         """
         columns_names = ', '.join(self._columns_names)
         columns_names = '(' + columns_names + ')'
         on_duplicate = ''
 
         if mode == self.PLACEHOLDER_MODE:
-            values_list = ', '.join(['%(' + col_name + ')s' for col_name in self._columns_names])
+            values_list = ', '.join(['%(' + col_name + ')s'
+                                     for col_name in self._columns_names])
             values_list = '(' + values_list + ')'
         else:
             value_names = re.findall(r'{{([^}]*)}}', where_clause)
@@ -108,10 +108,12 @@ class Writer:
         cnx = db.handle
         cursor = cnx.cursor()
 
-        # exclusivité en écriture pour assurer une suite cohérente d'id autoincrementés
-#        cursor.execute('LOCK TABLES {} WRITE'.format(self._table_name))
+        # exclusivité en écriture pour assurer
+        # une suite cohérente d'id autoincrementés
+        #       cursor.execute('LOCK TABLES {} WRITE'.format(self._table_name))
         # TODO : Adapter 2 abstract layer mysql / pgsql / etc
-        cursor.execute('LOCK TABLE {} IN ACCESS EXCLUSIVE MODE NOWAIT'.format(self._table_name))
+        cursor.execute('LOCK TABLE {} IN ACCESS'
+                       ' EXCLUSIVE MODE NOWAIT'.format(self._table_name))
         # print("====> {}".format(self._raw_insert_ignore_request))
         # print("====> {}".format(str(self._bulk_list)))
         try:
@@ -125,7 +127,7 @@ class Writer:
         self._bulk_list.clear()
 
         # TODO : Adapter 2 abstract layer mysql / pgsql / etc
-#        cursor.execute('UNLOCK TABLES')
+        #        cursor.execute('UNLOCK TABLES')
         cursor.close()
         cnx.commit()
         cnx.close()

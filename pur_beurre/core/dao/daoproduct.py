@@ -8,7 +8,8 @@ from core.model.product import Product
 
 class DaoProduct(object):
     """ DaoProduct """
-    def __init__(self, name_table = "Product"):
+
+    def __init__(self, name_table="Product"):
         """ DaoProduct needs active cnx
          to be functional"""
         self.database = DbConnector()
@@ -22,7 +23,8 @@ class DaoProduct(object):
         :return: object product
         """
         cursor = self.cnx.cursor()
-        cursor.execute('SELECT id FROM %s WHERE code = %s', (self.name_table, ean,))
+        cursor.execute('SELECT id FROM %s WHERE code = %s',
+                       (self.name_table, ean,))
         prod_id = cursor.fetchone()
         cursor.close()
         return None if prod_id is None else prod_id[0]
@@ -35,7 +37,8 @@ class DaoProduct(object):
         """
         product = None
         cursor = self.cnx.cursor()
-        cursor.execute('SELECT * FROM %s WHERE id = %s', (self.name_table, ident,))
+        cursor.execute('SELECT * FROM %s WHERE id = %s',
+                       (self.name_table, ident,))
         a_row = cursor.fetchone()
         if a_row:
             map_row = dict(zip(cursor.column_names, a_row))
@@ -43,9 +46,13 @@ class DaoProduct(object):
         cursor.close()
         return product
 
-    def get_product_list_by_category_id(self, category_id, assoc_name = "ProductCategory", limit=100):
+    def get_product_list_by_category_id(self,
+                                        category_id,
+                                        assoc_name="ProductCategory",
+                                        limit=100):
         """
         get a product object from his category_id
+        :param assoc_name:
         :param limit:
         :param category_id:
         :return: object product list
@@ -54,9 +61,9 @@ class DaoProduct(object):
         products_list = list()
 
         cursor = self.cnx.cursor()
-        cursor.execute("SELECT * FROM %s P" \
-                       "    INNER JOIN %s PC ON P.id = PC.product_id" \
-                       " WHERE PC.category_id = %s" \
+        cursor.execute("SELECT * FROM %s P"
+                       "    INNER JOIN %s PC ON P.id = PC.product_id"
+                       " WHERE PC.category_id = %s"
                        " LIMIT  " + str(limit)
                        , (category_id, assoc_name, self.name_table,))
 
@@ -68,9 +75,13 @@ class DaoProduct(object):
 
         return None if category_id is None else products_list
 
-    def get_products_list_by_match(self, match_keys, assoc_name = "ProductCategory", other_name = "Category", limit=100):
+    def get_products_list_by_match(self,
+                                   match_keys, assoc_name="ProductCategory",
+                                   other_name="Category", limit=100):
         """
         get a substitute product list from  id product
+        :param other_name:
+        :param assoc_name:
         :param match_keys: string that contains key words to find
         :lparam imit: limit
         :return: list json of products
@@ -89,11 +100,14 @@ class DaoProduct(object):
                     "           ,P.`generic_name`,P.`brands`) " \
                     "           AGAINST ('%s' in BOOLEAN MODE) " \
                     "       OR " \
-                    "           MATCH (C.`name`) AGAINST ('%s' in BOOLEAN MODE) " \
-                    "group by P.id "\
+                    "           MATCH (C.`name`) " \
+                    "           AGAINST ('%s' in BOOLEAN MODE) " \
+                    "group by P.id " \
                     "LIMIT  " + str(limit)
 
-        cursor.execute(final_req % (self.name_table, assoc_name, other_name, match_keys, match_keys))
+        cursor.execute(final_req % (self.name_table,
+                                    assoc_name, other_name,
+                                    match_keys, match_keys))
 
         for a_row in cursor:
             map_row = dict(zip(cursor.column_names, a_row))
@@ -102,9 +116,13 @@ class DaoProduct(object):
         cursor.close()
         return None if id is None else products_list
 
-    def get_products_subst_list_by_id(self, ident, assoc_name = "ProductCategory", other_name = "Category", limit=100):
+    def get_products_subst_list_by_id(self, ident,
+                                      assoc_name="ProductCategory",
+                                      other_name="Category", limit=100):
         """
         get a substitute product list from  id product
+        :param other_name:
+        :param assoc_name:
         :param ident:  id of product to match
         :return: list json of products
         """
@@ -125,17 +143,22 @@ class DaoProduct(object):
         if all(comp_str):
             escaped_str = (comp_str[0]).replace("'", " ")
             final_req = "select  P.*, nb_shared_categories ," \
-                        "MATCH (P.`product_name`,P.`generic_name`,P.`brands`) AGAINST (" \
+                        "MATCH (P.`product_name`," \
+                        "   P.`generic_name`," \
+                        "   P.`brands`)" \
+                        "   AGAINST (" \
                         "       '%s'" \
                         "  IN NATURAL LANGUAGE MODE) AS score" \
                         "    FROM (" \
                         "        SELECT" \
                         "            product_id," \
-                        "            COUNT(product_id) AS nb_shared_categories," \
+                        "            COUNT(product_id) " \
+                        "                AS nb_shared_categories," \
                         "            category_id" \
                         "        FROM" \
                         "           %s PC2" \
-                        "            INNER JOIN %s AS C2 ON PC2.category_id = C2.id " \
+                        "            INNER JOIN %s AS C2 ON" \
+                        "            PC2.category_id = C2.id " \
                         "            WHERE category_id IN (" \
                         "                SELECT category_id " \
                         "                   FROM %s " \
@@ -147,10 +170,14 @@ class DaoProduct(object):
                         "    WHERE P.nutrition_grade < (" \
                         "       SELECT nutrition_grade FROM %s WHERE id = %s" \
                         "       )" \
-                        "ORDER BY nb_shared_categories DESC, nutrition_grade, score desc " \
+                        "ORDER BY nb_shared_categories DESC," \
+                        "nutrition_grade, score desc " \
                         "LIMIT  " + str(limit)
 
-            cursor.execute(final_req % (escaped_str, assoc_name, other_name, assoc_name, self.name_table, other_name, self.name_table, ident, ident))
+            cursor.execute(final_req % (
+                escaped_str, assoc_name, other_name,
+                assoc_name, self.name_table, other_name,
+                self.name_table, ident, ident))
 
         for a_row in cursor:
             map_row = dict(zip(cursor.column_names, a_row))
@@ -159,9 +186,12 @@ class DaoProduct(object):
         cursor.close()
         return None if id is None else products_list
 
-    def get_recorded_substitutes_product(self, other_name = "Substitute", limit=100):
+    def get_recorded_substitutes_product(self,
+                                         other_name="Substitute",
+                                         limit=100):
         """
         get the recorded substitutes
+        :param other_name:
         :param limit:
         :return: dict join p1 / p2 list
         """
@@ -169,21 +199,21 @@ class DaoProduct(object):
         substitutes_list = list()
 
         cursor = self.cnx.cursor()
-        cursor.execute("select " \
-                       "p2.product_name AS NOM_PRODUIT, " \
-                       "p2.generic_name AS GENERIQUE_PRODUIT," \
-                       "p2.brands AS MARQUE_PRODUIT, " \
-                       "p2.nutrition_grade  AS GRADE_PRODUIT, " \
-                       "p1.product_name AS NOM_SUBSTITUT, " \
-                       "p1.generic_name AS GENERIQUE_SUBSTITUT, " \
-                       "p1.brands AS MARQUE_SUBSTITUT, " \
-                       "p1.nutrition_grade AS GRADE_SUBSTITUT" \
-                       "    from %s s " \
-                       "    inner join %s p1 on  p1.id = s.substitute_product_id" \
-                       "	inner join %s p2 on  p2.id = s.product_id"
-#                    " LIMIT  " + str(limit)
-                       % (other_name, self.name_table,  self.name_table)
-                      )
+        cursor.execute("select "
+                       "p2.product_name AS NOM_PRODUIT, "
+                       "p2.generic_name AS GENERIQUE_PRODUIT,"
+                       "p2.brands AS MARQUE_PRODUIT, "
+                       "p2.nutrition_grade  AS GRADE_PRODUIT, "
+                       "p1.product_name AS NOM_SUBSTITUT, "
+                       "p1.generic_name AS GENERIQUE_SUBSTITUT, "
+                       "p1.brands AS MARQUE_SUBSTITUT, "
+                       "p1.nutrition_grade AS GRADE_SUBSTITUT"
+                       "  from %s s "
+                       "  inner join %s p1 on  p1.id = s.substitute_product_id"
+                       "  inner join %s p2 on  p2.id = s.product_id"
+                       #                    " LIMIT  " + str(limit)
+                       % (other_name, self.name_table, self.name_table)
+                       )
 
         for a_row in cursor:
             map_row = dict(zip(cursor.column_names, a_row))

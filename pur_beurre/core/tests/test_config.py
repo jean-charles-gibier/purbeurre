@@ -1,5 +1,6 @@
-from django.test import TestCase
+# coding=utf-8
 from core import dbconnector as dbc
+from django.test import TestCase
 
 
 class FillerTestCase(TestCase):
@@ -11,8 +12,3 @@ class FillerTestCase(TestCase):
         # vérifie qu'il y a bien une db fonctionnelle
         handle = dbc.DbConnector()
         self.assertIsNotNone(handle)
-
-
-
-
-

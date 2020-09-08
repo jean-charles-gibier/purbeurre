@@ -24,19 +24,23 @@ def parse_arguments(argv=None):
     parser.add_argument("-gcl", "--get_category_list", help="""  Get category list
         """, action="store_true")
     parser.add_argument("-gplc", "--get_product_list_by_category_id",
-                        help="""  Get product list by category_id""", default="")
+                        help="""  Get product list by category_id""",
+                        default="")
     parser.add_argument("-gpsl", "--get_products_subst_list",
-                        help="""  Get product subsitute list by id""", default="0")
+                        help="""  Get product subsitute list by id""",
+                        default="0")
     parser.add_argument("-gplm", "--get_products_list_by_match",
                         help="""  Get product by match on key words
         between the names of products or categories. Wildcad '*' is allowed.
         """, default="")
     parser.add_argument("-ssp", "--set_substitute_product",
-                        help="""  Set relation product,substitute by id""", default="")
+                        help="""  Set relation product,substitute by id""",
+                        default="")
     parser.add_argument("-gsp", "--get_recorded_substitutes_product",
                         help="""  Get recorded substitutes list
         """, action="store_true")
-    parser.add_argument("-r", "--reload", help="Reload database from Openfactsfood services",
+    parser.add_argument("-r", "--reload",
+                        help="Reload database from Openfactsfood services",
                         action="store_true")
     # si on argv est passé en parametre
     # on checke si les arguments sont présents

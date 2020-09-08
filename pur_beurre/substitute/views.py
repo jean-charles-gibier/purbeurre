@@ -18,7 +18,8 @@ class ListRegisteredSubstitutes(LoginRequiredMixin, ListView):
     liste des subsituts enregistrés
     acces limité a l'utilistateur enregistré
     """
-    template_name = "substitute/registered_substitutes.html"  # chemin vers les subtituts
+    # chemin vers les subtituts
+    template_name = "substitute/registered_substitutes.html"
     login_url = '/user/login/'
     model = sub.Substitute
     context_object_name = "substituts_enregistres"
@@ -53,8 +54,10 @@ def delete_substituts(request):
     # check if it is the last row on the last page
     value_page = request.GET.get("page")
     current_page = int("1" if value_page is None else value_page)
-    last_on_last_page = (sub.Substitute.objects.count() % PAGINATE_BY_NB) == 0 \
-                        and (sub.Substitute.objects.count() // PAGINATE_BY_NB) + 1 == current_page
+    last_on_last_page = (sub.Substitute.objects.count()
+                         % PAGINATE_BY_NB) == 0 and\
+                        (sub.Substitute.objects.count()
+                         // PAGINATE_BY_NB) + 1 == current_page
 
     if current_page is not None and current_page > 1:
         if last_on_last_page is True:

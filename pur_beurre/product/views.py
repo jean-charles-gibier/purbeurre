@@ -16,7 +16,8 @@ class ListProductsView(ListView):
     Le mot clé est comparé aux champs respectivement
     nom de poduit  ou nom de catégorie
     """
-    template_name = "product/query_products.html"  # chemin vers le template à afficher
+    # chemin vers le template à afficher
+    template_name = "product/query_products.html"
     model = prd.Product
     context_object_name = "produits_trouves"
     paginate_by = 5
@@ -24,7 +25,9 @@ class ListProductsView(ListView):
     def get_queryset(self):
         my_query = self.request.GET.get("query")
         if my_query is not None:
-            return prd.Product.objects.filter(Q(generic_name__icontains=my_query) | Q(brands__icontains=my_query))
+            return prd.Product.objects.filter(
+                Q(generic_name__icontains=my_query) |
+                Q(brands__icontains=my_query))
 
 
 class ListSubstitutesView(LoginRequiredMixin, ListView):
@@ -33,7 +36,8 @@ class ListSubstitutesView(LoginRequiredMixin, ListView):
     login requis
     Pagination / 6
     """
-    template_name = "product/query_substitutes.html"  # chemin vers le template à afficher
+    # chemin vers le template à afficher
+    template_name = "product/query_substitutes.html"
     login_url = '/user/login/'
     model = prd.Product
     context_object_name = "substituts_trouves"
@@ -79,7 +83,7 @@ def register_subsituts(request):
     idSubstitute = request.GET.get("sub")
     p_origin = prd.Product.objects.get(pk=idProduct)
     p_substitute = prd.Product.objects.get(pk=idSubstitute)
-    created = 'No'
+#    created = 'No'
 
     try:
         sub.Substitute.objects.get(
@@ -94,7 +98,7 @@ def register_subsituts(request):
             product_origin=p_origin,
             product_substitute=p_substitute
         )
-        created = 'Yes'
+#        created = 'Yes'
 
     reverse_url = reverse('home')
     messages.info(request, 'Selection enregisrée')
