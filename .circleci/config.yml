@@ -46,7 +46,7 @@ jobs:
       - run:
           command: |
             cd pur_beurre &&
-            mv user/tests/debian_test_ux_user.to_rename user/tests/debian_test_ux_user &&
+            mv user/tests/debian_test_ux_user.to_rename debian_test_ux_user &&
             xvfb-run python ./manage.py test user.tests.debian_test_ux_user
           name: TestSelenium
       - run: ls -lart /tmp
