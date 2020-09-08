@@ -16,5 +16,5 @@ class FillerTestCase(TestCase):
         """ test if filler works and model is instancied """
         fil.Filler().start(10)
         # vérifie qu'il y a bien 10 objets dans le model product
-        self.assertEqual(prd.Product.objects.count(), 10)
-        pass
+        self.assertGreaterEqual(prd.Product.objects.count(), 10)
+

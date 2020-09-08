@@ -90,6 +90,7 @@ class Filler(object):
 #                bla = input("Get Key.")
 
                 # ajout des index dans la table de jointure
+
                 product_category_writer.add_rows(new_list,
                                                  {"product_id": '$code',
                                                   "category_id": category_id})
@@ -103,7 +104,7 @@ class Filler(object):
                 logger.debug('End writing products')
                 logger.debug('Start writing product_category relations')
                 product_category_writer.join_rows(
-                    "((select id from " + PRODUCT_PRODUCT +
+                    "((select max(id) from " + PRODUCT_PRODUCT +
                     " where code ='{{product_id}}')," +
                     "{{category_id}})")
                 logger.debug('End writing product_category relations')

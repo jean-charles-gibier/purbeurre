@@ -10,5 +10,7 @@ class FillerTestCase(TestCase):
     def test_filler_installation(self):
         """ test if db is responsive """
         # vérifie qu'il y a bien une db fonctionnelle
-        handle = dbc.DbConnector()
-        self.assertIsNotNone(handle)
+        pg_cnx = dbc.DbConnector()
+        self.assertIsNotNone(pg_cnx.handle)
+
+

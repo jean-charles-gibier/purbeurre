@@ -8,6 +8,7 @@ from django.contrib import messages
 from user.forms import CustomUserCreationForm
 
 
+
 def dashboard_section(request, section='default'):
     print("DASHBOARD :: section : {}".format(section))
     return render(request, "user/dashboard.html")
@@ -60,6 +61,7 @@ def login(request):
     :param request:
     :return: render ok => dashboard  ko =>  login
     """
+
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
         username = request.POST['username']
