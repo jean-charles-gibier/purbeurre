@@ -25,8 +25,9 @@ Admin local :<br>
 <br/>    
 Test coverage courant :
  ````
-(venv) D:\path\to\PurBeurre\pur_beurre>coverage run --source='.' manage.py test core.tests.test_config  product.tests.test_filler product.tests.test_models product.tests.test_ux_product pur_beurre.tests.test_statics_pages user.tests.test_forms user.tests.test_ux_user
+(venv) D:\github\PurBeurre_switch\pur_beurre>coverage run --source='.' manage.py test core.tests.test_config core.tests.test_core  product.tests.test_filler product.tests.test_models product.tests.test_ux_product pur_beurre.tests.test_statics_pages user.tests.test_forms user.tests.test_ux_user
  ````
+
 Puis :
  ````
 venv) D:\path\to\PurBeurre\pur_beurre>coverage report 
