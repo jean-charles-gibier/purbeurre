@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -41,7 +42,6 @@ else:
     else:
         DEBUG = True
         ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -90,7 +90,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -100,14 +99,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'pur_beurre',
         'USER': 'pur_beurre',
-        'PASSWORD':  'pur_beurre',
+        'PASSWORD': 'pur_beurre',
         'HOST': '127.0.0.1',
         'PORT': 5432,
     }
 
-
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -127,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -141,7 +137,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-INTERNAL_IPS =['127.0.0.1']
+INTERNAL_IPS = ['127.0.0.1']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -157,7 +153,7 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
-    
+
 # awesome_website/settings.py
 LOGIN_REDIRECT_URL = "dashboard"
 # AUTH_USER_MODEL = 'user.CustomUser'

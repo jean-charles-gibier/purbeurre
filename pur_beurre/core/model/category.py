@@ -6,12 +6,16 @@ category definition
 
 class Category:
     """ category constructor """
+
     def __init__(self, **category):
         # petite verrue l'attribut id de off est renommé en tag
         self._columns_values = dict()
-        self._columns_values['tag'] = category['id'] if 'id' in category else None
-        self._columns_values['url'] = category['url'] if 'url' in category else None
-        self._columns_values['name'] = category['name'] if 'name' in category else None
+        self._columns_values['tag'] = category['id'] if 'id'\
+                                                        in category else None
+        self._columns_values['url'] = category['url'] if 'url'\
+                                                         in category else None
+        self._columns_values['name'] = category['name'] if 'name'\
+                                                           in category else None
         self._columns_names = ['tag', 'url', 'name']
 
     # builder json

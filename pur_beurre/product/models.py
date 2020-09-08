@@ -20,7 +20,7 @@ class Product(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        """ 
+        """
         Cette méthode permet de definir l'entité product
         """
         return self.name
@@ -36,7 +36,7 @@ class Category(models.Model):
         ordering = ['name']
 
     def __str__(self):
-        """ 
+        """
         Cette méthode permet de definir l'entité category
         """
         return self.name

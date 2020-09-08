@@ -7,11 +7,11 @@ from core.model.category import Category
 
 class DaoCategory(object):
     """ definit les acces aux modele de donnees """
-    def __init__(self, name_table = "Category"):
+
+    def __init__(self, name_table="Category"):
         self.db = DbConnector()
         self.cnx = self.db.handle
         self.name_table = name_table
-
 
     def get_category_id(self, tag):
         """
@@ -35,14 +35,14 @@ class DaoCategory(object):
         """
         category = None
         cursor = self.cnx.cursor()
-        cursor.execute('SELECT * FROM %s WHERE id = %s', (ident, self.name_table))
+        cursor.execute('SELECT * FROM %s WHERE id = %s',
+                       (ident, self.name_table))
         a_row = cursor.fetchone()
         if a_row:
             map_row = dict(zip(cursor.column_names, a_row))
             category = Category.buildfrommysql(**map_row)
         cursor.close()
         return category
-
 
     def get_category_list(self, limit=100):
         """

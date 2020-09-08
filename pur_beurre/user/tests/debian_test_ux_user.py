@@ -1,22 +1,22 @@
+# coding=utf-8
 import os
+import time
+
 import pytest
 from django.test import LiveServerTestCase
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from product import models as prd
-from core.dbconnector import DbConnector
-from django.contrib.auth.models import User
-
-import time
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 BASE_DIR = \
     os.sep.join(os.path.dirname(os.path.abspath(__file__)).split(os.sep)[:-2])
 os.environ["PATH"] += os.pathsep + os.path.join(BASE_DIR, 'driver')
 
-@pytest.mark.skipif('DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION',
+
+@pytest.mark.skipif('DEPLOY_ENVIRON' in os.environ
+                    and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION',
                     reason="requires production environement")
 class AccountTestCase(LiveServerTestCase):
 
@@ -42,7 +42,6 @@ class AccountTestCase(LiveServerTestCase):
         self.sub_login_success()
         self.sub_register_fail_yet_registered()
         self.sub_register_clean()
-
 
     def sub_register_clean(self):
         """  supprime un user
@@ -73,17 +72,17 @@ class AccountTestCase(LiveServerTestCase):
 
         try:
             submit = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((((By.XPATH, "//button[@type='submit' and contains(text(), 'Créer le compte')]")))))
+                EC.presence_of_element_located(
+                    (((By.XPATH, "//button[@type='submit' and contains(text(), 'Créer le compte')]")))))
             submit.click()
         except:
             self.assertIsNotNone(submit)
 
         try:
-               WebDriverWait(self.driver, 100).until(
+            WebDriverWait(self.driver, 100).until(
                 EC.presence_of_element_located((((By.XPATH, "//h2[contains(text(), 'Hello')]")))))
         except:
-            assert(1 == 0)
-
+            assert (1 == 0)
 
     def sub_register_fail_yet_registered(self):
         """  crée un user existant pour le test
@@ -96,7 +95,7 @@ class AccountTestCase(LiveServerTestCase):
             dconx.click()
         except:
             self.assertIsNotNone(dconx)
-                                         
+
         time.sleep(10)
         self.driver.get(self.live_server_url + '/user/register/')
         time.sleep(10)
@@ -123,18 +122,18 @@ class AccountTestCase(LiveServerTestCase):
 
         try:
             submit = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((((By.XPATH, "//button[@type='submit' and contains(text(), 'Créer le compte')]")))))
+                EC.presence_of_element_located(
+                    (((By.XPATH, "//button[@type='submit' and contains(text(), 'Créer le compte')]")))))
             submit.click()
         except:
             self.assertIsNotNone(submit)
 
         try:
             test = WebDriverWait(self.driver, 100).until(
-                EC.presence_of_element_located((((By.XPATH, "//p[contains(@class, 'text-info') and contains(text(), '[Un utilisateur avec ce nom existe déjà.]')]")))))
+                EC.presence_of_element_located((((By.XPATH,
+                                                  "//p[contains(@class, 'text-info') and contains(text(), '[Un utilisateur avec ce nom existe déjà.]')]")))))
         except:
-            assert(1 == 0)
-
-
+            assert (1 == 0)
 
     def sub_login_success(self):
         """ doit réussir si le user a été créée """
@@ -158,12 +157,10 @@ class AccountTestCase(LiveServerTestCase):
             self.assertIsNotNone(submit)
 
         try:
-              WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((((By.XPATH, "//h2[contains(text(), 'Hello')]")))))
         except:
-            assert(1 == 0)
-
-
+            assert (1 == 0)
 
     def test_login_fail(self):
         """
@@ -190,9 +187,8 @@ class AccountTestCase(LiveServerTestCase):
             self.assertIsNotNone(submit)
 
         try:
-             WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((((By.XPATH, "//p[contains(@class, 'danger') and contains(text(), 'Veuillez saisir à nouveau vos identifiants ou créer un compte')]")))))
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((((By.XPATH,
+                                                  "//p[contains(@class, 'danger') and contains(text(), 'Veuillez saisir à nouveau vos identifiants ou créer un compte')]")))))
         except:
-            assert(1 == 0)
-
-
+            assert (1 == 0)

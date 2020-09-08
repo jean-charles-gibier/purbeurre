@@ -11,13 +11,13 @@ class Product():
         self._columns_values = dict()
         self._columns_values['code'] = product['code'][0:100] \
             if 'code' in product else '0000000000000'
-        self._columns_values['name'] = product['product_name'][0:300]  \
+        self._columns_values['name'] = product['product_name'][0:300] \
             if 'product_name' in product else ''
         self._columns_values['generic_name'] = product['generic_name_fr'][0:200] \
             if 'generic_name_fr' in product else ''
-        self._columns_values['brands'] = product['brands'][0:100]  \
+        self._columns_values['brands'] = product['brands'][0:100] \
             if 'brands' in product else 'None'
-        self._columns_values['stores'] = product['stores'][0:100]  \
+        self._columns_values['stores'] = product['stores'][0:100] \
             if 'stores' in product else ''
         self._columns_values['url'] = product['url'] \
             if 'url' in product else ''
@@ -43,7 +43,7 @@ class Product():
         """ data from mysql """
         # get 1 map from 2 with different origins => fusion with key change
         translation = {
- #           'code': 'code',
+            #           'code': 'code',
             'generic_name': 'generic_name_fr',
             'nutrition_grade': 'nutrition_grade_fr'}
         new_map = dict([

@@ -19,11 +19,14 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='pur_beurre/home.html'), name='home'),
+    path('', TemplateView.as_view(template_name='pur_beurre/home.html'),
+         name='home'),
     path('substitutes/', include('substitute.urls')),
     path('products/', include('product.urls')),
     path(r"user/", include("user.urls")),
-    path(r"legal_notice/", TemplateView.as_view(template_name='pur_beurre/legal_notice.html'), name='legal_notice')
+    path(r"legal_notice/",
+         TemplateView.as_view(template_name='pur_beurre/legal_notice.html'),
+         name='legal_notice')
 ]
 
 if settings.DEBUG:
@@ -31,7 +34,3 @@ if settings.DEBUG:
     urlpatterns = [
         re_path('^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
-    
-    
-    
-    

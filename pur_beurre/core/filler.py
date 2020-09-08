@@ -4,7 +4,6 @@ This package is imported from project #5
 Adapted to Pgsql just 2 feed the db
 """
 import logging as lg
-import pprint
 from core import constant
 from core.dao.daocategory import DaoCategory
 from core.dao.writer import Writer
@@ -19,6 +18,7 @@ PRODUCT_PRODUCT = "product_product"
 PRODUCT_CATEGORY = "product_category"
 PRODUCT_CATEGORIES = "product_product_categories"
 SUBSTITUTE_SUBSITUTES = "substitute_substitutes"
+
 
 class Filler(object):
     """ classe en charge du chargement de la base """
@@ -37,7 +37,8 @@ class Filler(object):
             raise Exception("No category found for {} : Abort."
                             .format(constant.DEFAULT_COUNTRY_ORIGIN))
 
-        logger.debug('Il y a %d categories à charger.', category_downloader.nb_categories)
+        logger.debug('Il y a %d categories à charger.',
+                     category_downloader.nb_categories)
         category_writer = Writer(PRODUCT_CATEGORY)
         product_writer = Writer(PRODUCT_PRODUCT)
         product_category_writer = Writer(PRODUCT_CATEGORIES)
@@ -67,15 +68,18 @@ class Filler(object):
             category_id = dao_category.get_category_id(category['id'])
 
             # parcours des produits par catégories
-            while product_downloader.fetch(category['name'], nb_products_to_load):
-                logger.debug('Start getting page #%d', product_downloader.page_counter - 1)
+            while product_downloader.fetch(category['name'],
+                                           nb_products_to_load):
+                logger.debug('Start getting page #%d',
+                             product_downloader.page_counter - 1)
                 # parcours des produits de la page courante
-                new_list = product_writer.add_rows(product_downloader.list_products, Product)
+                new_list = product_writer.add_rows(
+                    product_downloader.list_products, Product)
 
                 # si une limite de de collecte a été indiquée
                 if remain_nb_products > 0:
                     nb_collected = len(new_list)
-                    if nb_collected > remain_nb_products :
+                    if nb_collected > remain_nb_products:
                         new_list = new_list[:remain_nb_products]
                     remain_nb_products = remain_nb_products - nb_collected
                 else:
@@ -87,7 +91,8 @@ class Filler(object):
 
                 # ajout des index dans la table de jointure
                 product_category_writer.add_rows(new_list,
-                                                 {"product_id": '$code', "category_id": category_id})
+                                                 {"product_id": '$code',
+                                                  "category_id": category_id})
                 logger.debug('End collecting category "%s"', category['name'])
                 # Ecriture en base
                 logger.debug('Start writing products')
@@ -95,7 +100,6 @@ class Filler(object):
                 product_writer.write_rows()
 
 #                bla = input("After product_writer.write_rows().")
-
                 logger.debug('End writing products')
                 logger.debug('Start writing product_category relations')
                 product_category_writer.join_rows(
@@ -104,7 +108,8 @@ class Filler(object):
                     "{{category_id}})")
                 logger.debug('End writing product_category relations')
 
-                logger.debug('End getting page #%d', product_downloader.page_counter - 1)
+                logger.debug('End getting page #%d',
+                             product_downloader.page_counter - 1)
             logger.debug('End collecting category "%s"', category['name'])
         logger.debug('End collecting products')
 
@@ -114,5 +119,6 @@ class Filler(object):
         product_id, substitute_product_id = pc_tuple[0], pc_tuple[1]
         product_substitute = Writer(SUBSTITUTE_SUBSITUTES)
         product_substitute.add_rows({1}, {"product_id": product_id,
-                                          "substitute_product_id": substitute_product_id})
+                                          "substitute_product_id":
+                                              substitute_product_id})
         product_substitute.write_rows()

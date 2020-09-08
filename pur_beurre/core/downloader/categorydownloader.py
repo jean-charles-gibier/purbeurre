@@ -2,8 +2,8 @@
 """
 module de chargement des catégories
 """
-import sys
 import logging as lg
+import sys
 
 from core import constant
 
@@ -26,7 +26,8 @@ class CategoryDownloader(object):
         """ get number of categories """
         return len(self._list_categories)
 
-    def fetch(self, origin=constant.DEFAULT_COUNTRY_ORIGIN, number=constant.LIMIT_NB_CATEGORIES,
+    def fetch(self, origin=constant.DEFAULT_COUNTRY_ORIGIN,
+              number=constant.LIMIT_NB_CATEGORIES,
               lower_limit=constant.LOW_LIMIT_NB_PRODUCTS):
         """fetch  downloads categories from OFF API
         origin : pays d'origine des relevés
@@ -43,13 +44,14 @@ class CategoryDownloader(object):
         }
 
         try:
-#            print("====> Appel  get categories")
+            #            print("====> Appel  get categories")
             response = core.downloader.customrequest.special_get(
                 constant.API_URL_CATEGORIES, payload)
-#            print("====> Appel  get categories : Done")
+            #            print("====> Appel  get categories : Done")
 
             data = response.json()
-            # on ne selectionne que les catégories avec un nombre "consequent" de produits
+            # on ne selectionne que les catégories avec
+            # un nombre "consequent" de produits
             self._list_categories = [categorie for categorie in data['tags']
                                      if categorie["products"] > lower_limit]
         except:
