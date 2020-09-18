@@ -6,7 +6,7 @@ Le produit intialement hébergé sur la plateforme Heroku à été redéployée 
 qui permet de compartiementer l'application, l'itégration des services satellites (Base de donnée, serveur, dns, sockage des statiques) sur le "cloud"
 
 # installation du serveur
-Outre le choix du l'image serveur EC2 et du service RDS (base pgsql), les étapes d'installation de l'instance (ie :le serveur virtuel mis en fonction) peuvent définies dans le paramétrage du service
+Outre le choix du l'image serveur EC2 et du service RDS (base pgsql), les étapes d'installation de l'instance (ie :le serveur virtuel mis en fonction) peuvent être définies dans le paramétrage du service
 ou installées via une connexion ssh de la façon suivante :
 
 ```
@@ -50,6 +50,9 @@ python ./manage.py migrate
 python ./manage.py filler
 python manage.py collectstatic
 sudo systemctl enable cron
+
+export DEPLOY_ENVIRON=PRODUCTION
+gunicorn --pythonpath pur_beurre pur_beurre.wsgi
 ```
 
 Une fois mis en place le sysème de 'cron' pourra être programmé de la façon suivante pour une mise à jour automatisée de la base :
@@ -82,4 +85,14 @@ Une fois mis en place le sysème de 'cron' pourra être programmé de la façon 
 
 ````
 
+Contenu du fichier de supervision '/etc/supervisor/conf.d/pur_beurre-gunicorn.conf'
 
+```
+[program:pur_beurre-gunicorn]
+environment = DEPLOY_ENVIRON="PRODUCTION"
+command = /home/ubuntu/.local/share/virtualenvs/ubuntu-7Wf190Ea/bin/gunicorn --pythonpath pur_beurre pur_beurre.wsgi
+user = ubuntu
+directory = /home/ubuntu/PurBeurre
+autostart = true
+autorestart = true
+```
