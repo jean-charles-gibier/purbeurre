@@ -17,6 +17,7 @@ sudo apt install -y nginx
 sudo apt install -y python3-pip
 sudo apt install -y python-dev
 sudo apt install -y libpq-dev
+sudo apt-get install supervisor
 sudo pip3 install pipenv
 pipenv install
 pipenv shell
