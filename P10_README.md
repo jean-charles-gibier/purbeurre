@@ -6,7 +6,7 @@ Le produit intialement hébergé sur la plateforme Heroku à été redéployée 
 qui permet de compartiementer l'application, l'itégration des services satellites (Base de donnée, serveur, dns, sockage des statiques) sur le "cloud"
 
 # installation du serveur
-Outre le choix du l'image serveur EC2 et du service RDS (base pgsql), les étapes d'installation de l'instance (ie :le serveur virtuel mis en fonction) peuvent définies dans le paramétrage du service
+Outre le choix du l'image serveur EC2 et du service RDS (base pgsql), les étapes d'installation de l'instance (ie :le serveur virtuel mis en fonction) peuvent être définies dans le paramétrage du service
 ou installées via une connexion ssh de la façon suivante :
 
 ```
