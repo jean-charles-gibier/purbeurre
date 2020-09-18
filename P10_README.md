@@ -50,6 +50,9 @@ python ./manage.py migrate
 python ./manage.py filler
 python manage.py collectstatic
 sudo systemctl enable cron
+
+export DEPLOY_ENVIRON=PRODUCTION
+gunicorn --pythonpath pur_beurre pur_beurre.wsgi
 ```
 
 Une fois mis en place le sysème de 'cron' pourra être programmé de la façon suivante pour une mise à jour automatisée de la base :
