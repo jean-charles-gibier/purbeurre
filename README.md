@@ -3,6 +3,8 @@ status : [![CircleCI](https://circleci.com/gh/jean-charles-gibier/PurBeurre.svg?
 # PurBeurre
 Projet 8 DaPy
 
+/Note : ce dépôt conserve également les documents du [projet 10](https://github.com/jean-charles-gibier/PurBeurre/edit/production_aws/README.md) qui complete le P8/
+
  La société "Pur beurre" souhaite un site dont les exigences sont décrites dans 
  le document suivant : [Brief P8](https://openclassrooms.com/fr/paths/68/projects/159/assignment)
 
