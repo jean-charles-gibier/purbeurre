@@ -85,4 +85,14 @@ Une fois mis en place le sysème de 'cron' pourra être programmé de la façon 
 
 ````
 
+Contenu du fichier de supervision '/etc/supervisor/conf.d/pur_beurre-gunicorn.conf'
 
+```
+[program:pur_beurre-gunicorn]
+environment = DEPLOY_ENVIRON="PRODUCTION"
+command = /home/ubuntu/.local/share/virtualenvs/ubuntu-7Wf190Ea/bin/gunicorn --pythonpath pur_beurre pur_beurre.wsgi
+user = ubuntu
+directory = /home/ubuntu/PurBeurre
+autostart = true
+autorestart = true
+```
