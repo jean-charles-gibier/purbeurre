@@ -10,12 +10,12 @@ Le projet est déployé en fonction du résultat des tests (initiés au projet 8
 Le dashboard de l'integration est [présent ici](https://app.circleci.com/pipelines/github/jean-charles-gibier/PurBeurre)
 
 # Surveillance de l'activité
-Le monitoring du site est hébergé à la fois par :
-[Le service Sentry](https://sentry.io/organizations/onmyown/issues/?project=5435011)
+Le monitoring du site est hébergé à la fois par :<br>
+[Le service Sentry](https://sentry.io/organizations/onmyown/issues/?project=5435011)<br>
 Et par [les outils de supervision AWS](https://eu-west-3.console.aws.amazon.com/cloudwatch/home?region=eu-west-3#)
 
 # installation du serveur
-Le service est hébergé dans [le cloud AWS](https://aws.amazon.com/fr/)
+Le service est hébergé dans [le cloud AWS](https://aws.amazon.com/fr/)<br>
 Outre le choix du l'image serveur EC2 et du service RDS (base pgsql), les étapes d'installation de l'instance (ie :le serveur virtuel mis en fonction) peuvent être définies dans le paramétrage du service
 ou installées via une connexion ssh de la façon suivante :
 
