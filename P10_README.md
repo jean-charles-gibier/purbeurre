@@ -11,8 +11,8 @@ Le dashboard de l'integration est [présent ici](https://app.circleci.com/pipeli
 
 # Surveillance de l'activité
 Le monitoring du site est hébergé à la fois par :<br>
-[Le service Sentry](https://sentry.io/organizations/onmyown/issues/?project=5435011)<br>
-Et par [les outils de supervision AWS](https://eu-west-3.console.aws.amazon.com/cloudwatch/home?region=eu-west-3#)
+[Le service Sentry](https://sentry.io/organizations/onmyown/issues/?project=5435011) pour l'analyse des log Django<br>
+Et par [les outils de supervision AWS](https://eu-west-3.console.aws.amazon.com/cloudwatch/home?region=eu-west-3#)pour l'infrastructure.
 
 # installation du serveur
 Le service est hébergé dans [le cloud AWS](https://aws.amazon.com/fr/)<br>
