@@ -3,7 +3,7 @@ Brieffing [présent ici](https://openclassrooms.com/fr/paths/68/projects/160/ass
 
 ## La démarche
 Le produit intialement hébergé sur la plateforme Heroku à été redéployée sur AWS (Amazon Web Services)
-qui permet de compartiementer l'application, l'itégration des services satellites (Base de donnée, serveur, dns, sockage des statiques) sur le "cloud"
+qui permet de compartimenter l'application, l'itégration des services satellites (Base de donnée, serveur, dns, sockage des statiques) sur le "cloud"
 
 # Integration continue
 Le projet est déployé en fonction du résultat des tests (initiés au projet 8) l'outil employé ici est circle CI<br>
