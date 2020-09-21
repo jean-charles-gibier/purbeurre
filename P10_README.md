@@ -3,9 +3,19 @@ Brieffing [présent ici](https://openclassrooms.com/fr/paths/68/projects/160/ass
 
 ## La démarche
 Le produit intialement hébergé sur la plateforme Heroku à été redéployée sur AWS (Amazon Web Services)
-qui permet de compartiementer l'application, l'itégration des services satellites (Base de donnée, serveur, dns, sockage des statiques) sur le "cloud"
+qui permet de compartimenter l'application, l'itégration des services satellites (Base de donnée, serveur, dns, sockage des statiques) sur le "cloud"
+
+# Integration continue
+Le projet est déployé en fonction du résultat des tests (initiés au projet 8) l'outil employé ici est circle CI<br>
+Le dashboard de l'integration est [présent ici](https://app.circleci.com/pipelines/github/jean-charles-gibier/PurBeurre)
+
+# Surveillance de l'activité
+Le monitoring du site est hébergé à la fois par :<br>
+[Le service Sentry](https://sentry.io/organizations/onmyown/issues/?project=5435011) pour l'analyse des log Django<br>
+Et par [les outils de supervision AWS](https://eu-west-3.console.aws.amazon.com/cloudwatch/home?region=eu-west-3#)pour l'infrastructure.
 
 # installation du serveur
+Le service est hébergé dans [le cloud AWS](https://aws.amazon.com/fr/)<br>
 Outre le choix du l'image serveur EC2 et du service RDS (base pgsql), les étapes d'installation de l'instance (ie :le serveur virtuel mis en fonction) peuvent être définies dans le paramétrage du service
 ou installées via une connexion ssh de la façon suivante :
 
@@ -49,6 +59,11 @@ python ./manage.py makemigrations
 python ./manage.py migrate
 python ./manage.py filler
 python manage.py collectstatic
+
+# apres installation de raven et enregistrement Sentry
+pip install --upgrade sentry-sdk
+python manage.py raven test
+
 sudo systemctl enable cron
 
 export DEPLOY_ENVIRON=PRODUCTION
