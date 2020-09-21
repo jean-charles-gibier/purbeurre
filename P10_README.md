@@ -61,6 +61,7 @@ python ./manage.py filler
 python manage.py collectstatic
 
 # apres installation de raven et enregistrement Sentry
+pip install --upgrade sentry-sdk
 python manage.py raven test
 
 sudo systemctl enable cron
