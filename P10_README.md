@@ -59,6 +59,10 @@ python ./manage.py makemigrations
 python ./manage.py migrate
 python ./manage.py filler
 python manage.py collectstatic
+
+# apres installation de raven et enregistrement Sentry
+python manage.py raven test
+
 sudo systemctl enable cron
 
 export DEPLOY_ENVIRON=PRODUCTION
