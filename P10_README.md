@@ -100,11 +100,12 @@ Une fois mis en place le sysème de 'cron' pourra être programmé de la façon 
 
 ````
 
-Contenu du fichier de supervision '/etc/supervisor/conf.d/pur_beurre-gunicorn.conf'
+Contenu du fichier de supervision '/etc/supervisor/conf.d/pur_beurre-gunicorn.conf'<br>
+avec le paramètre DJANGO_SETTINGS_MODULE pointant sur la configuration de production.
 
 ```
 [program:pur_beurre-gunicorn]
-environment = DEPLOY_ENVIRON="PRODUCTION"
+environment = DEPLOY_ENVIRON="PRODUCTION",DJANGO_SETTINGS_MODULE="pur_beurre.settings.production"
 command = /home/ubuntu/.local/share/virtualenvs/ubuntu-7Wf190Ea/bin/gunicorn --pythonpath pur_beurre pur_beurre.wsgi
 user = ubuntu
 directory = /home/ubuntu/PurBeurre
