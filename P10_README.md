@@ -32,7 +32,7 @@ sudo pip3 install pipenv
 pipenv install
 pipenv shell
 cd ~/PurBeurre/pur_beurre
-pip install -r PurBeurre/requirements.txt
+pip install -r requirements.txt
 mkdir /home/ubuntu/PurBeurre/pur_beurre/dumps/
 
 cd /etc/nginx/
