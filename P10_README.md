@@ -96,7 +96,7 @@ Une fois mis en place le sysème de 'cron' pourra être programmé de la façon 
 # m h  dom mon dow   command
 
 # MAJ de la base OFF exécute la commande chaque jour à 4h00.
-0 4 * * * cd Pur_beurre/pur_beurre && python ./manage.py purge 2>&1 >> /tmp/purge.log && python ./manage.py filler 2>&1 >> /tmp/filler.log
+0 4 * * * cd PurBeurre/pur_beurre && pipenv run python ./manage.py purge 2>&1 >> /tmp/purge.log && pipenv run python ./manage.py filler 2>&1 >> /tmp/filler.log
 
 ````
 
