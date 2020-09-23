@@ -8,7 +8,7 @@ qui permet de compartimenter l'application, l'itégration des services satellite
 # Integration continue
 Le projet est déployé en fonction du résultat des tests (initiés au projet 8) l'outil employé ici est circle CI<br>
 Le dashboard de l'integration est [présent ici](https://app.circleci.com/pipelines/github/jean-charles-gibier/PurBeurre)<br>
-La présent branche "production_aws" à été dupliquée pour expérimenter l'autre outil d'intégration continue nommé "Travis".
+La présent branche "production_aws" à été dupliquée pour expérimenter l'autre outil d'intégration continue nommé "Travis".<br>
 Le dépot est [présent ici](https://github.com/jean-charles-gibier/mysandbox).
 
 # Surveillance de l'activité
