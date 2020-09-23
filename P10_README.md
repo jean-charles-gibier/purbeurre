@@ -32,7 +32,7 @@ sudo pip3 install pipenv
 pipenv install
 pipenv shell
 cd ~/PurBeurre/pur_beurre
-pip install -r PurBeurre/requirements.txt
+pip install -r requirements.txt
 mkdir /home/ubuntu/PurBeurre/pur_beurre/dumps/
 
 cd /etc/nginx/
@@ -96,15 +96,16 @@ Une fois mis en place le sysème de 'cron' pourra être programmé de la façon 
 # m h  dom mon dow   command
 
 # MAJ de la base OFF exécute la commande chaque jour à 4h00.
-0 4 * * * cd Pur_beurre/pur_beurre && python ./manage.py purge 2>&1 >> /tmp/purge.log && python ./manage.py filler 2>&1 >> /tmp/filler.log
+0 4 * * * cd PurBeurre/pur_beurre && pipenv run python ./manage.py purge 2>&1 >> /tmp/purge.log && pipenv run python ./manage.py filler 2>&1 >> /tmp/filler.log
 
 ````
 
-Contenu du fichier de supervision '/etc/supervisor/conf.d/pur_beurre-gunicorn.conf'
+Contenu du fichier de supervision '/etc/supervisor/conf.d/pur_beurre-gunicorn.conf'<br>
+avec le paramètre DJANGO_SETTINGS_MODULE pointant sur la configuration de production.
 
 ```
 [program:pur_beurre-gunicorn]
-environment = DEPLOY_ENVIRON="PRODUCTION"
+environment = DEPLOY_ENVIRON="PRODUCTION",DJANGO_SETTINGS_MODULE="pur_beurre.settings.production"
 command = /home/ubuntu/.local/share/virtualenvs/ubuntu-7Wf190Ea/bin/gunicorn --pythonpath pur_beurre pur_beurre.wsgi
 user = ubuntu
 directory = /home/ubuntu/PurBeurre
