@@ -1,5 +1,7 @@
 # Complément de documentation pour le projet 10
-Brieffing [présent ici](https://openclassrooms.com/fr/paths/68/projects/160/assignment)
+Brieffing [présent ici](https://openclassrooms.com/fr/paths/68/projects/160/assignment)<br>
+Le site installé [est accessible ici](ttp://15.237.65.43/)<br>
+
 
 ## La démarche
 Le produit intialement hébergé sur la plateforme Heroku à été redéployée sur AWS (Amazon Web Services)
