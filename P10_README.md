@@ -1,6 +1,6 @@
 # Complément de documentation pour le projet 10
 Brieffing [présent ici](https://openclassrooms.com/fr/paths/68/projects/160/assignment)<br>
-Le site installé [est accessible ici](ttp://15.237.65.43/)<br>
+Le site installé [est accessible ici](http://15.237.65.43/)<br>
 
 
 ## La démarche
