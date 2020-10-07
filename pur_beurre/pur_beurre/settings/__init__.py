@@ -25,7 +25,6 @@ print("BASE_DIR :: {}".format(BASE_DIR))
 SECRET_KEY = '^+%82556f9ka=e3q!z67#fxr1br1y*ds80)@+7=&u^*nr*hb@('
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ['SECRET_KEY']
-print('secret key :{}'.format(len(SECRET_KEY)))
 
 ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -35,13 +34,21 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
     else:
         DEBUG = False
     ALLOWED_HOSTS = ['15.237.65.43']
-else:
+else: # FORCER LE DEBUG EN PRODUCTION
     if 'FORCE_DEBUG' in os.environ and os.environ['FORCE_DEBUG'] == 'NO':
         DEBUG = False
         ALLOWED_HOSTS = ['15.237.65.43']
     else:
         DEBUG = True
-        ALLOWED_HOSTS = []
+        ALLOWED_HOSTS = ['127.0.0.1']
+
+if 'DEPLOY_ENVIRON' in os.environ:
+    print('DEPLOY_ENVIRON = {}'.format(os.environ and os.environ['DEPLOY_ENVIRON']))
+if 'FORCE_DEBUG' in os.environ:
+    print('FORCE_DEBUG = {}'.format(os.environ and os.environ['FORCE_DEBUG']))
+print('ALLOWED_HOSTS :{}'.format( ",".join(ALLOWED_HOSTS) ))
+print('len secret key :{}'.format(len(SECRET_KEY)))
+print('DEBUG :{}'.format(DEBUG))
 
 # Application definition
 
@@ -97,11 +104,13 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'purbeurre',
-        'PASSWORD': 'purbeurre',
-#        'HOST': '127.0.0.1',
-        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
+        'NAME': 'purbeurre',
+#        'USER': 'purbeurre',
+        'USER': 'postgres',
+#        'PASSWORD': 'purbeurre',
+        'PASSWORD': 'my00pass',
+        'HOST': '127.0.0.1',
+#        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
         'PORT': 5432,
     }
 
@@ -152,6 +161,16 @@ STATICFILES_DIRS = (
 if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION':
     STATIC_ROOT = os.path.join(BASE_DIR, 'dumps')
 #    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    if 'AWS_ACCESS_KEY_ID' in os.environ :
+        AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    if 'AWS_SECRET_ACCESS_KEY' in os.environ :
+        AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    if 'AWS_STORAGE_BUCKET_NAME' in os.environ :
+        AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 

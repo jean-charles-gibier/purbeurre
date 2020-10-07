@@ -13,7 +13,7 @@ from core.model.category import Category
 from core.model.product import Product
 
 logger = lg.getLogger(__name__)
-
+#lg.basicConfig(level=lg.DEBUG, format='%(message)s')
 PRODUCT_PRODUCT = "product_product"
 PRODUCT_CATEGORY = "product_category"
 PRODUCT_CATEGORIES = "product_product_categories"
@@ -70,18 +70,20 @@ class Filler(object):
             # parcours des produits par catégories
             while product_downloader.fetch(category['name'],
                                            nb_products_to_load):
-                logger.debug('Start getting page #%d',
-                             product_downloader.page_counter - 1)
                 # parcours des produits de la page courante
                 new_list = product_writer.add_rows(
                     product_downloader.list_products, Product)
+                nb_collected = len(new_list)
+
+                logger.debug('Start getting page #%d with %d elements',
+                             product_downloader.page_counter - 1,
+                             nb_collected)
 
                 # si une limite de de collecte a été indiquée
-                if remain_nb_products > 0:
-                    nb_collected = len(new_list)
+                if remain_nb_products > 0 and nb_collected > 0:
                     if nb_collected > remain_nb_products:
                         new_list = new_list[:remain_nb_products]
-                    remain_nb_products = remain_nb_products - nb_collected
+                    nb_products_to_load = remain_nb_products - nb_collected
                 else:
                     break
 
