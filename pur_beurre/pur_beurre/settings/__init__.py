@@ -105,12 +105,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'purbeurre',
-#        'USER': 'purbeurre',
-        'USER': 'postgres',
-#        'PASSWORD': 'purbeurre',
-        'PASSWORD': 'my00pass',
-        'HOST': '127.0.0.1',
-#        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
+        'USER': 'purbeurre',
+#        'USER': 'postgres',
+        'PASSWORD': 'purbeurre',
+#        'PASSWORD': 'my00pass',
+        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
+#        'HOST': '127.0.0.1',
         'PORT': 5432,
     }
 
