@@ -12,6 +12,9 @@ class ProductTestCase(TestCase):
         categories etc.
         :return:
         """
+        prd.Product.objects.all().delete()
+        prd.Category.objects.all().delete()
+
         dummy_cat = prd.Category.objects.create(
             tag='tg0000',
             name='category 000',

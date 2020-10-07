@@ -13,7 +13,8 @@ from core.model.category import Category
 from core.model.product import Product
 
 logger = lg.getLogger(__name__)
-#lg.basicConfig(level=lg.DEBUG, format='%(message)s')
+# for debug in verbose mode
+# lg.basicConfig(level=lg.DEBUG, format='%(message)s')
 PRODUCT_PRODUCT = "product_product"
 PRODUCT_CATEGORY = "product_category"
 PRODUCT_CATEGORIES = "product_product_categories"
@@ -51,14 +52,14 @@ class Filler(object):
         category_writer.write_rows()
         logger.debug('End writing categories')
 
+        nb_products_to_load = \
+            min([remain_nb_products, constant.LIMIT_NB_PRODUCTS])
         # parcours des categories enregistrées
         logger.debug('Start collecting products')
         for category in category_downloader.list_categories:
             # break si on est au delà du nb de produits à collecter
-            nb_products_to_load = \
-                min([remain_nb_products, constant.LIMIT_NB_PRODUCTS])
 
-            if nb_products_to_load < 0:
+            if nb_products_to_load <= 0:
                 break
 
             logger.debug('Start collecting category "%s"', category['name'])
@@ -80,10 +81,11 @@ class Filler(object):
                              nb_collected)
 
                 # si une limite de de collecte a été indiquée
-                if remain_nb_products > 0 and nb_collected > 0:
+                if nb_products_to_load > 0 and nb_collected > 0:
                     if nb_collected > remain_nb_products:
                         new_list = new_list[:remain_nb_products]
-                    nb_products_to_load = remain_nb_products - nb_collected
+                        nb_collected = len(new_list)
+                    nb_products_to_load = nb_products_to_load - nb_collected
                 else:
                     break
 
