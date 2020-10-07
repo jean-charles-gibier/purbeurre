@@ -104,9 +104,9 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'purbeurre',
+#        'NAME': 'purbeurre',
+        'NAME': 'postgres',
         'USER': 'purbeurre',
-#        'USER': 'postgres',
         'PASSWORD': 'purbeurre',
 #        'PASSWORD': 'my00pass',
         'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
@@ -171,6 +171,9 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
     if 'AWS_STORAGE_BUCKET_NAME' in os.environ :
         AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 
+    print('AWS_ACCESS_KEY_ID :{}'.format( AWS_ACCESS_KEY_ID ))
+    print('AWS_SECRET_ACCESS_KEY :{}'.format( AWS_SECRET_ACCESS_KEY ))
+    print('AWS_STORAGE_BUCKET_NAME :{}'.format( AWS_STORAGE_BUCKET_NAME ))
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 
