@@ -109,7 +109,7 @@ avec le paramètre DJANGO_SETTINGS_MODULE pointant sur la configuration de produ
 
 ```
 [program:pur_beurre-gunicorn]
-environment = DEPLOY_ENVIRON="PRODUCTION",DJANGO_SETTINGS_MODULE="pur_beurre.settings.production"
+environment = DEPLOY_ENVIRON="PRODUCTION",DJANGO_SETTINGS_MODULE="pur_beurre.settings.production",AWS_ACCESS_KEY_ID=AKIAIXVEWFUD54TOWYDA,AWS_SECRET_ACCESS_KEY=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,AWS_STORAGE_BUCKET_NAME=tuto-aws-appli-bucket
 command = /home/ubuntu/.local/share/virtualenvs/ubuntu-7Wf190Ea/bin/gunicorn --pythonpath pur_beurre pur_beurre.wsgi
 user = ubuntu
 directory = /home/ubuntu/PurBeurre
