@@ -15,7 +15,7 @@ import os
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 print("BASE_DIR :: {}".format(BASE_DIR))
 
 # Quick-start development settings - unsuitable for production
@@ -34,11 +34,11 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
         DEBUG = True
     else:
         DEBUG = False
-    ALLOWED_HOSTS = ['yapb.herokuapp.com']
+    ALLOWED_HOSTS = ['15.237.65.43']
 else:
     if 'FORCE_DEBUG' in os.environ and os.environ['FORCE_DEBUG'] == 'NO':
         DEBUG = False
-        ALLOWED_HOSTS = ['127.0.0.1']
+        ALLOWED_HOSTS = ['15.237.65.43']
     else:
         DEBUG = True
         ALLOWED_HOSTS = []
@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+#    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'pur_beurre.urls'
@@ -97,10 +97,11 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pur_beurre',
-        'USER': 'pur_beurre',
-        'PASSWORD': 'pur_beurre',
-        'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'purbeurre',
+        'PASSWORD': 'purbeurre',
+#        'HOST': '127.0.0.1',
+        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
         'PORT': 5432,
     }
 
@@ -150,7 +151,7 @@ STATICFILES_DIRS = (
 
 if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION':
     STATIC_ROOT = os.path.join(BASE_DIR, 'dumps')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 

@@ -17,6 +17,8 @@ from django.conf import settings
 from django.urls import path, re_path, include
 from django.views.generic import TemplateView
 
+def trigger_error(request):
+        division_by_zero = 1 / 0
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='pur_beurre/home.html'),
@@ -26,7 +28,8 @@ urlpatterns = [
     path(r"user/", include("user.urls")),
     path(r"legal_notice/",
          TemplateView.as_view(template_name='pur_beurre/legal_notice.html'),
-         name='legal_notice')
+         name='legal_notice'),
+#     path('sentry-debug/', trigger_error),
 ]
 
 if settings.DEBUG:
