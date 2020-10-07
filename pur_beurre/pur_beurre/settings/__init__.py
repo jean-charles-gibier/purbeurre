@@ -159,17 +159,22 @@ STATICFILES_DIRS = (
 )
 
 if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION':
-    STATIC_ROOT = os.path.join(BASE_DIR, 'dumps')
+#    STATIC_ROOT = os.path.join(BASE_DIR, 'dumps')
 #    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+#
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_ACCESS_KEY_ID = 'default_access_key_id' 
+    AWS_SECRET_ACCESS_KEY = 'default_secret_access_key'
+    AWS_STORAGE_BUCKET_NAME = 'default_storage_bucket_name'
+
     if 'AWS_ACCESS_KEY_ID' in os.environ :
         AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     if 'AWS_SECRET_ACCESS_KEY' in os.environ :
         AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
     if 'AWS_STORAGE_BUCKET_NAME' in os.environ :
         AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_S3_REGION_NAME='eu-west-3'
 
     print('AWS_ACCESS_KEY_ID :{}'.format( AWS_ACCESS_KEY_ID ))
     print('AWS_SECRET_ACCESS_KEY :{}'.format( AWS_SECRET_ACCESS_KEY ))
