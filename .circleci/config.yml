@@ -31,6 +31,7 @@ jobs:
       - save_cache:
           key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
+            - "Pipfile.lock"
             - '.venv'
             - '/usr/local/bin'
             - '/usr/local/lib/python3.6/site-packages'
