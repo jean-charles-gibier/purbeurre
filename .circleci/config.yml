@@ -43,13 +43,14 @@ jobs:
           command: |
             cd pur_beurre &&
             python ./manage.py migrate --fake &&
-            echo "python ./manage.py test product.tests.test_filler product.tests.test_models"
+            python ./manage.py test product.tests.test_filler product.tests.test_models
           name: TestStd
       - run:
           command: |
             cd pur_beurre &&
             cp user/tests/debian_test_ux_user.to_rename user/tests/debian_test_ux_user.py &&
-            echo "xvfb-run python ./manage.py test user.tests.debian_test_ux_user"
+            python ./manage.py migrate --fake &&
+            xvfb-run python ./manage.py test user.tests.debian_test_ux_user
           name: TestSelenium
       - run: ls -lart /tmp
 
