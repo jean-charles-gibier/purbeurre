@@ -6,14 +6,14 @@ Adapted to Pgsql just 2 feed the db
 import logging as lg
 from core import constant
 from core.dao.daocategory import DaoCategory
-from core.dao.writer import Writer
+from core.dao.writer_orm import Writer
 from core.downloader.categorydownloader import CategoryDownloader
 from core.downloader.productdownloader import ProductDownloader
 from core.model.category import Category
 from core.model.product import Product
 
 logger = lg.getLogger(__name__)
-#lg.basicConfig(level=lg.DEBUG, format='%(message)s')
+lg.basicConfig(level=lg.DEBUG, format='%(message)s')
 PRODUCT_PRODUCT = "product_product"
 PRODUCT_CATEGORY = "product_category"
 PRODUCT_CATEGORIES = "product_product_categories"
@@ -27,6 +27,10 @@ class Filler(object):
         """ unique mehode de chargement """
         # remain nb of products to collect
         remain_nb_products = nbmaxproducts
+        # nb products to load resized
+        nb_products_to_load = \
+            max([remain_nb_products, constant.LIMIT_NB_PRODUCTS])
+
         # instance de chargement des catégories
         category_downloader = CategoryDownloader()
         # instance de chargement des produits
@@ -55,10 +59,8 @@ class Filler(object):
         logger.debug('Start collecting products')
         for category in category_downloader.list_categories:
             # break si on est au delà du nb de produits à collecter
-            nb_products_to_load = \
-                min([remain_nb_products, constant.LIMIT_NB_PRODUCTS])
 
-            if nb_products_to_load < 0:
+            if nb_products_to_load <= 0:
                 break
 
             logger.debug('Start collecting category "%s"', category['name'])
@@ -69,7 +71,11 @@ class Filler(object):
 
             # parcours des produits par catégories
             while product_downloader.fetch(category['name'],
-                                           nb_products_to_load):
+                                           constant.CHUK_NB_PRODUCTS_BY_PAGE):
+
+                if nb_products_to_load <= 0:
+                    break
+
                 # parcours des produits de la page courante
                 new_list = product_writer.add_rows(
                     product_downloader.list_products, Product)
@@ -81,9 +87,10 @@ class Filler(object):
 
                 # si une limite de de collecte a été indiquée
                 if remain_nb_products > 0 and nb_collected > 0:
-                    if nb_collected > remain_nb_products:
-                        new_list = new_list[:remain_nb_products]
-                    nb_products_to_load = remain_nb_products - nb_collected
+                    if nb_collected > nb_products_to_load:
+                        new_list = new_list[:nb_products_to_load]
+                        nb_collected = nb_products_to_load
+                    nb_products_to_load = nb_products_to_load - nb_collected
                 else:
                     break
 
@@ -91,16 +98,17 @@ class Filler(object):
 #                pprint.pprint(new_list[0])
 #                bla = input("Get Key.")
 
-                # ajout des index dans la table de jointure
-
-                product_category_writer.add_rows(new_list,
-                                                 {"product_id": '$code',
-                                                  "category_id": category_id})
                 logger.debug('End collecting category "%s"', category['name'])
+
                 # Ecriture en base
                 logger.debug('Start writing products')
 #                bla = input("Before product_writer.write_rows().")
                 product_writer.write_rows()
+
+                # ajout des index dans la table de jointure
+                product_category_writer.add_rows(new_list,
+                                                 {"product_id": '$code',
+                                                  "category_id": category_id})
 
 #                bla = input("After product_writer.write_rows().")
                 logger.debug('End writing products')
@@ -114,8 +122,9 @@ class Filler(object):
                 logger.debug('End getting page #%d',
                              product_downloader.page_counter - 1)
             logger.debug('End collecting category "%s"', category['name'])
-        logger.debug('End collecting products')
 
+        logger.debug('End collecting products')
+    
     @classmethod
     def set_substitute_product(cls, pc_tuple):
         """  enregistre les liasons subistitut / produit """
