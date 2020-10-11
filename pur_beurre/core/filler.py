@@ -19,7 +19,6 @@ PRODUCT_CATEGORY = "product_category"
 PRODUCT_CATEGORIES = "product_product_categories"
 SUBSTITUTE_SUBSITUTES = "substitute_substitutes"
 
-
 class Filler(object):
     """ classe en charge du chargement de la base """
     @classmethod
@@ -55,6 +54,8 @@ class Filler(object):
         category_writer.write_rows()
         logger.debug('End writing categories')
 
+        nb_products_to_load = \
+            min([remain_nb_products, constant.LIMIT_NB_PRODUCTS])
         # parcours des categories enregistrées
         logger.debug('Start collecting products')
         for category in category_downloader.list_categories:
@@ -124,7 +125,7 @@ class Filler(object):
             logger.debug('End collecting category "%s"', category['name'])
 
         logger.debug('End collecting products')
-    
+
     @classmethod
     def set_substitute_product(cls, pc_tuple):
         """  enregistre les liasons subistitut / produit """
