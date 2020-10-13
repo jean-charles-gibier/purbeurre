@@ -8,6 +8,8 @@ TODO : passer en parametre au demarrage
 LOW_LIMIT_NB_PRODUCTS = 10000
 # default nb de catégories max à charger (overlaps LOW_LIMIT_NB_PRODUCTS)
 LIMIT_NB_CATEGORIES = 20
+# Nombre de produit par page/ recuperation fetch
+CHUK_NB_PRODUCTS_BY_PAGE = 100
 # default country origin
 DEFAULT_COUNTRY_ORIGIN = "France"
 # service API url for categories
