@@ -16,6 +16,7 @@ urlpatterns = [
              authentication_form=CustomAuthenticationForm),
          name='login'),
     path(r"register/", register, name="register"),
+    path(r"modify/", register, name="modify"),
     path(r"dashboard/", dashboard, name='dashboard'),
     re_path(r"^dashboard/(?P<section>\w+)$",
             dashboard_section,

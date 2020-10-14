@@ -5,9 +5,9 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from user.forms import CustomUserCreationForm
+from user.forms import CustomUserCreationForm, CustomUserChangeForm
 
-
+import pprint
 
 def dashboard_section(request, section='default'):
     print("DASHBOARD :: section : {}".format(section))
@@ -28,19 +28,29 @@ def user(request):
 
 def register(request):
 
+    # Are we in modification mode or in creation ?
+    is_modification = request.path.endswith('modify/') 
+    CustomizedForm = CustomUserChangeForm if is_modification else CustomUserCreationForm
+
     if request.method == "GET":
         initial_values = {}
         if request.user is not None and not request.user.is_anonymous:
+            initial_values['first_name'] =request.user.first_name
+            initial_values['last_name'] =request.user.last_name
             initial_values['username'] = request.user.username
             initial_values['email'] = request.user.email
+ 
         return render(
             request, "user/register.html",
-            {"form": CustomUserCreationForm(initial=initial_values)}
+            {"form": CustomizedForm(initial=initial_values)}
         )
 
     elif request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
-        form.fields['username'].widget.render_value = True
+        if not is_modification:
+            form = CustomizedForm(request.POST)
+            form.fields['username'].widget.render_value = True
+        else:
+            form = CustomizedForm(request.POST, instance=request.user)
 
         if form.is_valid():
             user = form.save()
