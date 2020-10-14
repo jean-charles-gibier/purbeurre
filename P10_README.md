@@ -46,7 +46,7 @@ sudo bash
 sudo cat << EOF > sites-available/pur_beurre
 	server { 
 			
-		listen 80; server_name http://15.237.65.43/; 
+		listen 80; server_name <<ip du serveur ou nom du domaine => Ne pas oublier d'autoriser la même adresse dans les settings de prod django>>; 
 		root /home/ubuntu/PurBeurre/;
 			
 		location / {

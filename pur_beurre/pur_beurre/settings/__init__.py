@@ -163,7 +163,7 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
 #
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    AWS_ACCESS_KEY_ID = 'default_access_key_id' 
+    AWS_ACCESS_KEY_ID = 'default_access_key_id'
     AWS_SECRET_ACCESS_KEY = 'default_secret_access_key'
     AWS_STORAGE_BUCKET_NAME = 'default_storage_bucket_name'
 
