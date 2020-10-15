@@ -1,7 +1,6 @@
 from . import *
 import raven
 import sentry_sdk
-import pprint
 from sentry_sdk.integrations.django import DjangoIntegration
 
 
