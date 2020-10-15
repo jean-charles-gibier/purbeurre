@@ -40,14 +40,14 @@ jobs:
       - run: cd pur_beurre/driver && tar xvzf geckodriver-v0.27.0-linux64.tar.gz geckodriver
       - run:
           environment:
-            DJANGO_SETTINGS_MODULE: pur_beurre.settings.production
+            DJANGO_SETTINGS_MODULE: pur_beurre.settings.deploy_ci
           command: |
             cd pur_beurre &&
             python ./manage.py test  product.tests.test_filler product.tests.test_models
           name: TestStd
       - run:
           environment:
-            DJANGO_SETTINGS_MODULE: pur_beurre.settings.production
+            DJANGO_SETTINGS_MODULE: pur_beurre.settings.deploy_ci
           command: |
             cd pur_beurre &&
             cp user/tests/debian_test_ux_user.to_rename user/tests/debian_test_ux_user.py &&
