@@ -99,18 +99,35 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+#DATABASES = {
+#
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'USER': 'postgres',
+#        'NAME': 'purbeurre',
+#        'PASSWORD': 'my00pass',
+#        'HOST': '127.0.0.1',
+#        'PORT': 5432,
+#        'TEST': {
+#                    'NAME': 'test_postgres2',
+#                },
+#    }
+#
+#}
+
 DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'NAME': 'purbeurre',
-        'PASSWORD': 'my00pass',
-        'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'purbeurre',
+        'PASSWORD': 'purbeurre',
+        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
         'PORT': 5432,
         'TEST': {
-                    'NAME': 'test_postgres2',
-                },
+            'NAME': 'test_postgres2',
+        },
+
     }
 
 }
@@ -163,7 +180,7 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
 #
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    AWS_ACCESS_KEY_ID = 'default_access_key_id'
+    AWS_ACCESS_KEY_ID = 'default_access_key_id' 
     AWS_SECRET_ACCESS_KEY = 'default_secret_access_key'
     AWS_STORAGE_BUCKET_NAME = 'default_storage_bucket_name'
 
