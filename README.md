@@ -8,7 +8,6 @@ Note : ce dépôt conserve également [les documents du projet 10](https://githu
  La société "Pur beurre" souhaite un site dont les exigences sont décrites dans 
  le document suivant : [Brief P8](https://openclassrooms.com/fr/paths/68/projects/159/assignment)
 
-
 installation:
 Git clone de ce projet + tests + migrations 
 
