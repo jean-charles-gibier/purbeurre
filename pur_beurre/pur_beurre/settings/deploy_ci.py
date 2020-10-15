@@ -1,3 +1,4 @@
+from . import *
 
 # CI : sim bdd de prod
 if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION':
