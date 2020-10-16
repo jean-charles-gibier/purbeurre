@@ -33,7 +33,7 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
         DEBUG = True
     else:
         DEBUG = False
-    ALLOWED_HOSTS = ['15.237.65.43', 'www.lemulotfou.com', 'lemulotfou.com']
+    ALLOWED_HOSTS = ['15.237.65.43', 'www.lemulotfou.com', 'lemulotfou.com', 'yapb.herokuapp.com']
 else: # FORCER LE DEBUG EN PRODUCTION
     if 'FORCE_DEBUG' in os.environ and os.environ['FORCE_DEBUG'] == 'NO':
         DEBUG = False
