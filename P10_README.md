@@ -46,7 +46,7 @@ sudo bash
 sudo cat << EOF > sites-available/pur_beurre
 	server { 
 			
-		listen 80; server_name http://15.237.65.43/; 
+		listen 80; server_name <<ip du serveur ou nom du domaine => Ne pas oublier d'autoriser la même adresse dans les settings de prod django>>; 
 		root /home/ubuntu/PurBeurre/;
 			
 		location / {
@@ -109,7 +109,7 @@ avec le paramètre DJANGO_SETTINGS_MODULE pointant sur la configuration de produ
 
 ```
 [program:pur_beurre-gunicorn]
-environment = DEPLOY_ENVIRON="PRODUCTION",DJANGO_SETTINGS_MODULE="pur_beurre.settings.production"
+environment = DEPLOY_ENVIRON="PRODUCTION",DJANGO_SETTINGS_MODULE="pur_beurre.settings.production",AWS_ACCESS_KEY_ID=AKIAIXVEWFUD54TOWYDA,AWS_SECRET_ACCESS_KEY=H87786Z8Z76ZZZ876Z78Z6Z786TZTZTYZU,AWS_STORAGE_BUCKET_NAME=tuto-aws-appli-bucket
 command = /home/ubuntu/.local/share/virtualenvs/ubuntu-7Wf190Ea/bin/gunicorn --pythonpath pur_beurre pur_beurre.wsgi
 user = ubuntu
 directory = /home/ubuntu/PurBeurre

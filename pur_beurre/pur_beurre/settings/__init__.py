@@ -25,7 +25,6 @@ print("BASE_DIR :: {}".format(BASE_DIR))
 SECRET_KEY = '^+%82556f9ka=e3q!z67#fxr1br1y*ds80)@+7=&u^*nr*hb@('
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ['SECRET_KEY']
-print('secret key :{}'.format(len(SECRET_KEY)))
 
 ALLOWED_HOSTS = []
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -34,14 +33,21 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
         DEBUG = True
     else:
         DEBUG = False
-    ALLOWED_HOSTS = ['15.237.65.43']
-else:
+    ALLOWED_HOSTS = ['15.237.65.43', 'www.lemulotfou.com', 'lemulotfou.com']
+else: # FORCER LE DEBUG EN PRODUCTION
     if 'FORCE_DEBUG' in os.environ and os.environ['FORCE_DEBUG'] == 'NO':
         DEBUG = False
-        ALLOWED_HOSTS = ['15.237.65.43']
     else:
         DEBUG = True
-        ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['127.0.0.1']
+
+if 'DEPLOY_ENVIRON' in os.environ:
+    print('DEPLOY_ENVIRON = {}'.format(os.environ and os.environ['DEPLOY_ENVIRON']))
+if 'FORCE_DEBUG' in os.environ:
+    print('FORCE_DEBUG = {}'.format(os.environ and os.environ['FORCE_DEBUG']))
+print('ALLOWED_HOSTS :{}'.format( ",".join(ALLOWED_HOSTS) ))
+print('len secret key :{}'.format(len(SECRET_KEY)))
+print('DEBUG :{}'.format(DEBUG))
 
 # Application definition
 
@@ -100,7 +106,6 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'purbeurre',
         'PASSWORD': 'purbeurre',
-#        'HOST': '127.0.0.1',
         'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
         'PORT': 5432,
         'TEST': {
@@ -153,8 +158,26 @@ STATICFILES_DIRS = (
 )
 
 if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION':
-    STATIC_ROOT = os.path.join(BASE_DIR, 'dumps')
+#    STATIC_ROOT = os.path.join(BASE_DIR, 'dumps')
 #    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_ACCESS_KEY_ID = 'default_access_key_id' 
+    AWS_SECRET_ACCESS_KEY = 'default_secret_access_key'
+    AWS_STORAGE_BUCKET_NAME = 'default_storage_bucket_name'
+
+    if 'AWS_ACCESS_KEY_ID' in os.environ :
+        AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    if 'AWS_SECRET_ACCESS_KEY' in os.environ :
+        AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    if 'AWS_STORAGE_BUCKET_NAME' in os.environ :
+        AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_S3_REGION_NAME='eu-west-3'
+
+    print('AWS_ACCESS_KEY_ID :{}'.format( AWS_ACCESS_KEY_ID ))
+    print('AWS_SECRET_ACCESS_KEY :{}'.format( AWS_SECRET_ACCESS_KEY ))
+    print('AWS_STORAGE_BUCKET_NAME :{}'.format( AWS_STORAGE_BUCKET_NAME ))
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 

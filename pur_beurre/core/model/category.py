@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*- #
+
+import pprint
+
 """
 category definition
 """
@@ -17,6 +20,21 @@ class Category:
         self._columns_values['name'] = category['name'] if 'name'\
                                                            in category else None
         self._columns_names = ['tag', 'url', 'name']
+
+
+    def __repr__(self):
+        return """columns_values :
+        self._columns_values['tag'] :""" + self._columns_values['tag'] + """
+        self._columns_values['url'] :""" + self._columns_values['url'] + """
+        self._columns_values['name'] :""" + self._columns_values['name'] 
+
+
+    def __str__(self):
+        return """columns_values :
+        self._columns_values['tag'] :""" + self._columns_values['tag'] + """
+        self._columns_values['url'] :""" + self._columns_values['url'] + """
+        self._columns_values['name'] :""" + self._columns_values['name'] 
+
 
     # builder json
     @classmethod

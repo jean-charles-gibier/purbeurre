@@ -31,6 +31,7 @@ jobs:
       - save_cache:
           key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
+            - 'Pipfile.lock'
             - '.venv'
             - '/usr/local/bin'
             - '/usr/local/lib/python3.6/site-packages'
@@ -39,14 +40,20 @@ jobs:
       - python/save-cache            
       - run: cd pur_beurre/driver && tar xvzf geckodriver-v0.27.0-linux64.tar.gz geckodriver
       - run:
+          environment:
+            DJANGO_SETTINGS_MODULE: pur_beurre.settings.deploy_ci
           command: |
             cd pur_beurre &&
+            python ./manage.py migrate --fake &&
             python ./manage.py test product.tests.test_filler product.tests.test_models
           name: TestStd
       - run:
+          environment:
+            DJANGO_SETTINGS_MODULE: pur_beurre.settings.deploy_ci
           command: |
             cd pur_beurre &&
             cp user/tests/debian_test_ux_user.to_rename user/tests/debian_test_ux_user.py &&
+            python ./manage.py migrate --fake &&
             xvfb-run python ./manage.py test user.tests.debian_test_ux_user
           name: TestSelenium
       - run: ls -lart /tmp

@@ -6,7 +6,11 @@
 {% block content %}
 
 <section class="page-section" id="register_section">
+{% if user.is_authenticated %}
+  <form class="form-signin rounded align-items-center " action="{% url 'modify' %}#register_section" method="POST">
+{% else %}
   <form class="form-signin rounded align-items-center " action="{% url 'register' %}#register_section" method="POST">
+{% endif %}
 
     <div class="text-center">
       <img src="{% static 'dist/assets/img/logo_pur_beurre.png' %}" alt="" width="80" height="80">
