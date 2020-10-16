@@ -99,22 +99,6 @@ WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-#DATABASES = {
-#
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'USER': 'postgres',
-#        'NAME': 'purbeurre',
-#        'PASSWORD': 'my00pass',
-#        'HOST': '127.0.0.1',
-#        'PORT': 5432,
-#        'TEST': {
-#                    'NAME': 'test_postgres2',
-#                },
-#    }
-#
-#}
-
 DATABASES = {
 
     'default': {
@@ -125,9 +109,8 @@ DATABASES = {
         'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
         'PORT': 5432,
         'TEST': {
-            'NAME': 'test_postgres2',
-        },
-
+                    'NAME': 'test_postgres2',
+                },        
     }
 
 }
