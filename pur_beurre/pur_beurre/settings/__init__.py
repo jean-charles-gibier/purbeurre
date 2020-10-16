@@ -37,10 +37,9 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
 else: # FORCER LE DEBUG EN PRODUCTION
     if 'FORCE_DEBUG' in os.environ and os.environ['FORCE_DEBUG'] == 'NO':
         DEBUG = False
-        ALLOWED_HOSTS = ['15.237.65.43']
     else:
         DEBUG = True
-        ALLOWED_HOSTS = ['127.0.0.1']
+    ALLOWED_HOSTS = ['127.0.0.1']
 
 if 'DEPLOY_ENVIRON' in os.environ:
     print('DEPLOY_ENVIRON = {}'.format(os.environ and os.environ['DEPLOY_ENVIRON']))
@@ -104,13 +103,10 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'purbeurre',
         'NAME': 'postgres',
         'USER': 'purbeurre',
         'PASSWORD': 'purbeurre',
-#        'PASSWORD': 'my00pass',
         'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
-#        'HOST': '127.0.0.1',
         'PORT': 5432,
         'TEST': {
                     'NAME': 'test_postgres2',

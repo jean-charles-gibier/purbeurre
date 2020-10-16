@@ -2,10 +2,9 @@
 Gestion des formulaires
 enregistrement / validation des données utilistateur
 """
-from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django import forms 
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
-
 
 class CustomUserCreationForm(UserCreationForm):
     """
@@ -52,6 +51,19 @@ class CustomUserCreationForm(UserCreationForm):
                 {'password1': ["Les mots de passe doivent être identiques."]}
             )
         return data
+
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        fields = ('email', 'first_name', 'last_name',)
+        exclude = ('username', 'password', 'is_superuser', 'last_login', 'is_staff', 'is_active', 'date_joined', 'groups', 'user_permissions')
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserChangeForm, self).__init__(*args, **kwargs)
+        self.fields['password'].help_text= "Cliquez <a href=\"../accounts/password_reset/\"> ICI</a> pour changer de mot de passe."
+
+    def clean_username(self):
+         return self.cleaned_data.get('username')
 
 
 class CustomAuthenticationForm(AuthenticationForm):
