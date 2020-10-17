@@ -45,6 +45,7 @@ class ListSubstitutesView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         idProduct = self.request.GET.get("id")
+        print('id product : {}'.format(idProduct))
         if idProduct is not None:
             p_selection = prd.Product.objects.get(pk=idProduct)
             p_categories = p_selection.categories.all()
