@@ -2,8 +2,12 @@
 
 from django.db.models import Q
 from django.test import TestCase
+from django.urls import reverse
 from product import models as prd
+from django.contrib.auth.models import User
 
+import inspect
+import pprint
 
 class ProductTestCase(TestCase):
     def setUp(self):
@@ -14,6 +18,7 @@ class ProductTestCase(TestCase):
         """
         prd.Product.objects.all().delete()
         prd.Category.objects.all().delete()
+
 
         dummy_cat = prd.Category.objects.create(
             tag='tg0000',
@@ -113,6 +118,44 @@ class ProductTestCase(TestCase):
         self.assertEqual(len(raws), 3)
 
 
+    def test_list_right_number_products(self):
+        """
+        vérifie la pertinence des objets (produits/categories) collectés 
+        le nombre d'elements retournés doit être exact.
+        :return:
+        """
+        # tous les cocas
+        response = self.client.get(reverse('query_products')+'?query=cola')
+        self.assertEqual(response.status_code, 200)
+
+        # pprint.pprint(response.context['produits_trouves'])
+        self.assertTrue(len(response.context['produits_trouves']) == 2)
+
+
+    def test_list_content_lowest_NG(self):
+        """
+        vérifie la pertinence des objets (produits/categories) collectés 
+        dans les listes remontées par les choix utilisateur.
+        Le "nutrition grade" doit être moindre que cleui du produit sélectionné
+        :return:
+        """
+        # tous les prd fde même categorie que la selection avec un meilleur 
+        # nutriscore
+        # On prend le 3eme enregistrement (le plus mauvais nutriscore) 
+        # Il y en a 3 meilleurs
+        self.user = User.objects.create_user(username='some_user',
+                                             email='some_user@somewhere.com',
+                                             password='Abcz1198!')
+        self.client.login(username='some_user@somewhere.com',
+                          password='Abcz1198!')
+
+        p001 = prd.Product.objects.get(code='0000000000001')
+        rev = reverse('query_substituts')+'?id='+ str(p001.pk)
+        response = self.client.get(rev)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(len(response.context['substituts_trouves']) == 3)
+
+
 class CategoryTestCase(TestCase):
     def setUp(self):
         """ prepare items for test """
@@ -140,3 +183,4 @@ class CategoryTestCase(TestCase):
 
         self.assertEqual(cat1.tag, 'tg0001')
         self.assertEqual(cat2.tag, 'tg0002')
+

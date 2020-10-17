@@ -26,8 +26,8 @@ class ListProductsView(ListView):
         my_query = self.request.GET.get("query")
         if my_query is not None:
             return prd.Product.objects.filter(
-                Q(generic_name=my_query) |
-                Q(brands__contains=my_query))
+                Q(generic_name__icontains=my_query) |
+                Q(brands__icontains=my_query))
 
 
 class ListSubstitutesView(LoginRequiredMixin, ListView):
@@ -45,6 +45,7 @@ class ListSubstitutesView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         idProduct = self.request.GET.get("id")
+        print('id product : {}'.format(idProduct))
         if idProduct is not None:
             p_selection = prd.Product.objects.get(pk=idProduct)
             p_categories = p_selection.categories.all()
@@ -57,7 +58,7 @@ class ListSubstitutesView(LoginRequiredMixin, ListView):
 
             list_prod = prd.Product.objects.filter(
                 categories__in=p_categories,
-                nutrition_grade__gt=p_nutrition_grade
+                nutrition_grade__lt=p_nutrition_grade
             ).order_by('nutrition_grade')
             return list_prod
 
