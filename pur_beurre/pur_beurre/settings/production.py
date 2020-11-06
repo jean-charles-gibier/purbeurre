@@ -85,5 +85,4 @@ if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTIO
                         'NAME': 'test_postgres2',
                     },
         }
-    
     }
