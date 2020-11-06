@@ -9,7 +9,7 @@ Purbeurre V 1.2 change.log <br>
 | # 	| Enhancements / bug-fixes	| Explanations 	|  
 |-	|-	  | -	  |
 | 1 | Adaptation du filler à l'orm django 	| L'ancien "filler" exploitait nativement le connecteur plsql (psychopg2). Cette remarque à d'ailleurs été soulevée dans la soutenance du projet 8. L'alimentation à donc été modifiée pour effectuer le travail avec l'ORM Django. Certains bugs ont également été incidemment corrigés (paramère des limites de chargement de produits ou de ctégories) |
-| 2 	| redirection sur un nom de domaine propriétaire 	| Le projet 10 proposait en option, l'achat et la redirection du nom de domaine sur le service, cette redirection est opérationelle via le domaine 'lemmulotfou.com' |
+| 2 	| redirection sur un nom de domaine propriétaire 	| Le projet 10 proposait en option, l'achat et la redirection du nom de domaine sur le service, cette redirection est opérationelle via le domaine '[lemulotfou.com]((https://www.lemulotfou.com)' |
 | 3 	|  Ajout d'un gestionnaire de static	| Le projet 8 proposait le middleware whitenoise comme gestionaire de fichiers static. L'amélioration propose une sauvegarde des "statics" sur le cloud AWS (S3) pour rester dans la perspective des choix du projet 10 |
  | 4 	|  Complétion du profil utilisateur	| Le systeme popose maintenant la modification des données personnelles de l'utilsateur (nom, prenom, mot de passe) sauvegardées par le système |
  | 5 	|  Regression mystère| Résolution des "modifications" glisssées par le mentor dans le cadre de ce projet  |
