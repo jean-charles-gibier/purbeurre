@@ -105,6 +105,10 @@ DATABASES = {
         'HOST': '127.0.0.1',
 #        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
         'PORT': 5432,
+        'TEST': {
+            'NAME': 'test_postgres2',
+        },
+
     }
 
 }
