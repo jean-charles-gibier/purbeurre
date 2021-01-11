@@ -112,8 +112,8 @@ class Writer:
         # une suite cohérente d'id autoincrementés
         #       cursor.execute('LOCK TABLES {} WRITE'.format(self._table_name))
         # TODO : Adapter 2 abstract layer mysql / pgsql / etc
-        cursor.execute('LOCK TABLE {} IN ACCESS'
-                       ' EXCLUSIVE MODE NOWAIT'.format(self._table_name))
+        # cursor.execute('LOCK TABLE {} IN ACCESS'
+        #               ' EXCLUSIVE MODE NOWAIT'.format(self._table_name))
         # print("====> {}".format(self._raw_insert_ignore_request))
         # print("====> {}".format(str(self._bulk_list)))
         try:

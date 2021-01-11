@@ -56,6 +56,8 @@ class ProductDownloader(object):
             "json": 1
         }
 
+        self._list_products = []
+
         try:
             #            print("====> Appel  get
             #            products page : {}".format(self._page_counter))

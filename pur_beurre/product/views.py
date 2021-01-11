@@ -53,7 +53,7 @@ class ListSubstitutesView(LoginRequiredMixin, ListView):
             lst_cat_id = ",".join([str(cat.id) for cat in p_categories])
             print('id product origin: {}'.format(idProduct))
             print('ids category: {}'.format(lst_cat_id))
-            print('nutrition grade lesser the: {}'.format(p_nutrition_grade))
+            print('nutrition grade lesser than: {}'.format(p_nutrition_grade))
 
             list_prod = prd.Product.objects.filter(
                 categories__in=p_categories,

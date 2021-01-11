@@ -97,11 +97,13 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'purbeurre',
-        'PASSWORD': 'purbeurre',
-#        'HOST': '127.0.0.1',
-        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
+        'NAME': 'purbeurre',
+#        'USER': 'purbeurre',
+        'USER': 'postgres',
+#        'PASSWORD': 'purbeurre',
+        'PASSWORD': 'my00pass',
+        'HOST': '127.0.0.1',
+#        'HOST': 'purbeurre.ctquseoiqna8.eu-west-3.rds.amazonaws.com',
         'PORT': 5432,
     }
 
@@ -152,6 +154,11 @@ STATICFILES_DIRS = (
 if 'DEPLOY_ENVIRON' in os.environ and os.environ['DEPLOY_ENVIRON'] == 'PRODUCTION':
     STATIC_ROOT = os.path.join(BASE_DIR, 'dumps')
 #    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_ACCESS_KEY_ID = 'AKIAIXVEWFUD54TOWYDA'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'tuto-aws-appli-bucket'
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 
